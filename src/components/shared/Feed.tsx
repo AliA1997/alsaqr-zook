@@ -16,16 +16,6 @@ interface Props {
     productCategory?: ProductCategories;
 }
 
-function FeedContainer({ children }: React.PropsWithChildren<any>) {
-    return (
-        <div className={`
-            col-span-7 scrollbar-hide border-x max-h-screen overflow-scroll lg:col-span-5 dark:border-gray-800 
-        `}>
-            {children}
-        </div>
-    );
-}
-
 
 const Feed = observer(({
     productCategory
@@ -288,22 +278,25 @@ const Feed = observer(({
     return (
         <ContentContainerWithRef
             classNames={`
-                text-left overflow-y-auto scrollbar-hide
-                grid w-full max-w-7xl grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 
-                ${productCategory ? "" : "xl:grid-cols-5"}
+                text-left scrollbar-hide
             `}
             innerRef={containerRef}
         >
+            <div className={`
+                scrollbar-hide max-h-screen overflow-scroll 
+                dark:border-gray-800 grid w-full max-w-7xl grid-cols-2 
+                gap-4 sm:grid-cols-3 md:grid-cols-4 ${productCategory ? "" : "xl:grid-cols-5"}
+            `}>
                 {loadedListings && loadedListings.length
                     ? loadedListings.map((listingRec) => (
                         <ProductCard product={listingRec} key={listingRec.id} showCategory={!productCategory} />
                     ))
                     : <NoRecordsTitle>No Listings to show</NoRecordsTitle>}
                 <LoadMoreTrigger />
+            </div>
         </ContentContainerWithRef>
     );
 });
 
-export { FeedContainer };
 
 export default Feed;

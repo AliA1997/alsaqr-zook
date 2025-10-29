@@ -11,9 +11,10 @@ interface ProductCardProps {
   product: ProductRecord;
   showCategory?: boolean;
   howSimilar?: HowSimilarKeys;
+  classNames?: string;
 }
 
-export default observer(function ProductCard({ product, showCategory, howSimilar }: ProductCardProps) {
+export default observer(function ProductCard({ classNames, product, showCategory, howSimilar }: ProductCardProps) {
   const { productFeedStore } = useStore();
   const navigate = useNavigate();
   const { setProductToViewId } = productFeedStore;
@@ -63,7 +64,10 @@ export default observer(function ProductCard({ product, showCategory, howSimilar
         setProductToViewId(product.id);
         navigate(`/products/${product.slug}`);
       }}
-      className="block transition-transform duration-200 hover:scale-[1.02]"
+      className={`
+        block transition-transform duration-200 hover:scale-[1.02]
+        ${classNames && classNames}
+      `}
     >
       <div className="flex h-full w-fit flex-col justify-around rounded-lg border border-gray-200 bg-white shadow-sm">
         {/* Header (Image) */}

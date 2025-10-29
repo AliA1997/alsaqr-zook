@@ -13,6 +13,8 @@ import Vehicles from "@features/Vehicles";
 import ListingPage from "@features/ListingPage";
 import Buying from "@features/Buying";
 import Selling from "@features/Selling";
+import Messages from "@features/Messages";
+import Notifications from "@features/Notifications";
 
 export const routes: RouteObject[] = [
   {
@@ -30,6 +32,9 @@ export const routes: RouteObject[] = [
       { path: '/sporting-goods', element: <SportingGoods /> },
       { path: '/toys-and-games', element: <ToysAndGames /> },
       { path: '/vehicles', element: <Vehicles /> },
+      { path: '/notifications', element: <Notifications /> },
+      { path: '/messages', element: <Messages /> },
+
     ],
   },
 ]

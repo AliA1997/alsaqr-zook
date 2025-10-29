@@ -1,6 +1,6 @@
 import React, { useCallback, useContext, useEffect, useState } from "react";
 import useEmblaCarousel, { type UseEmblaCarouselType } from "embla-carousel-react";
-import { ArrowRightIcon, ArrowLeftIcon } from "@heroicons/react/solid";
+import { ArrowRightIcon, ArrowLeftIcon } from "@heroicons/react/outline";
 
 
 // === Types ===
@@ -173,33 +173,34 @@ export const CarouselPrevious = React.forwardRef<
       } ${className}`}
       {...props}
     >
-      <ArrowLeftIcon className="h-4 w-4" />
+      <ArrowLeftIcon />
       <span className="sr-only">Previous slide</span>
     </button>
   );
 });
 
-// === CarouselNext ===
-export const CarouselNext = React.forwardRef<
-  HTMLButtonElement,
-  React.ButtonHTMLAttributes<HTMLButtonElement>
->(({ className = "", ...props }, ref) => {
-  const { orientation, scrollNext, canScrollNext } = useCarousel();
+// // === CarouselNext ===
+// export const CarouselNext = React.forwardRef<
+//   HTMLButtonElement,
+//   React.ButtonHTMLAttributes<HTMLButtonElement>
+// >(({ className = "", ...props }, ref) => {
+//   const { orientation, scrollNext, canScrollNext } = useCarousel();
 
-  return (
-    <button
-      ref={ref}
-      disabled={!canScrollNext}
-      onClick={scrollNext}
-      className={`absolute flex h-8 w-8 items-center justify-center rounded-full border border-gray-300 bg-white text-gray-700 shadow-sm transition hover:bg-gray-100 disabled:opacity-50 ${
-        orientation === "horizontal"
-          ? "-right-12 top-1/2 -translate-y-1/2"
-          : "-bottom-12 left-1/2 -translate-x-1/2 rotate-90"
-      } ${className}`}
-      {...props}
-    >
-      <ArrowRightIcon className="h-4 w-4" />
-      <span className="sr-only">Next slide</span>
-    </button>
-  );
-});
+//   return (
+//     <button
+//       ref={ref}
+//       disabled={!canScrollNext}
+//       onClick={scrollNext}
+//       className={`absolute flex h-8 w-8 items-center justify-center rounded-full border border-gray-300 bg-white text-gray-700 shadow-sm transition hover:bg-gray-100 disabled:opacity-50 ${
+//         orientation === "horizontal"
+//           ? "-right-12 top-1/2 -translate-y-1/2"
+//           : "-bottom-12 left-1/2 -translate-x-1/2 rotate-90"
+//       } ${className}`}
+//       {...props}
+//     >
+//       <ArrowRightIcon color="red" height={25} width={25} />
+//       <span className="sr-only">Next slide</span>
+//      </button>
+//   );
+// });
+ 
