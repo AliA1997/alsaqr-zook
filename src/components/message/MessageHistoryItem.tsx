@@ -71,7 +71,6 @@ function MessageHistoryItemComponent({
                             <div>
                                 <p className='text-gray-900 bold'>Last Messaged At:</p>
                                 <TimeAgo
-                                    className="text-sm text-gray-500 dark:text-gray-400"
                                     date={convertDateToDisplay(messageHistoryItem.lastMessageDate)}
                                 />
                             </div>

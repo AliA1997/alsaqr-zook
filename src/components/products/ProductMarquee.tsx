@@ -6,7 +6,6 @@ import {
 import type { SimilarProductRecord } from "@models/product";
 import ProductCard from "@components/products/ProductCard";
 import { HowSimilarKeys } from "@models/enums";
-import { useRef } from "react";
 
 interface ProductsMarqueeProps {
   products: SimilarProductRecord[];

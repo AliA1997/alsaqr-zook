@@ -39,7 +39,6 @@ function MessageItem({ loggedInUserId, messageToDisplay }: Props) {
                     )}
                 </div>
                 <TimeAgo
-                    className="text-sm text-gray-500"
                     date={convertDateToDisplay(messageToDisplay.message.createdAt)}
                 />
             </div>
