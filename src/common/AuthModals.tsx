@@ -24,14 +24,16 @@ export const LoginModal = observer(() => {
   
   return (
     <ModalPortal>
-      <ModalBody onClose={() => {
+      <ModalBody 
+        onClose={() => {
         const canCloseLoginModal = !(ROUTES_USER_CANT_ACCESS.some(r => pathname.includes(r)));
 
         if (canCloseLoginModal || currentSessionUser)
           closeModal();
 
-      }}>
-        <div className='flex flex-col justify-center'>
+        }}
+      >
+        <div className='flex flex-col justify-center' data-testid="loginmodal">
           <button
             className={`
               flex items-center p-3 border rounded-lg font-medium 

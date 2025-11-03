@@ -20,6 +20,7 @@ export default function ProductsMarquee({ products }: ProductsMarqueeProps) {
       }}
       orientation="horizontal"
       className="relative pb-[2rem]"
+      testId="productmarquee"
     >
       <CarouselContent className="-ml-2 px-2">
         {products.map((product, index) => {
@@ -31,6 +32,7 @@ export default function ProductsMarquee({ products }: ProductsMarqueeProps) {
               className="basis-1/2 pl-2 sm:basis-1/3 md:basis-1/4 md:pl-4 min-h-[15rem]"
             >
               <ProductCard 
+                testId="similarproductcard"
                 classNames="h-full"
                 howSimilar={howSimilarKey} 
                 product={product} 

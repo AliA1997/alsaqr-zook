@@ -14,6 +14,7 @@ interface CarouselProps {
   plugins?: CarouselPlugin;
   orientation?: "horizontal" | "vertical";
   setApi?: (api: CarouselApi) => void;
+  testId?: string;
 }
 
 // === Context ===
@@ -40,7 +41,7 @@ export const Carousel = React.forwardRef<
   React.HTMLAttributes<HTMLDivElement> & CarouselProps
 >(
   (
-    { orientation = "horizontal", opts, setApi, plugins, className = "", children, ...props },
+    { orientation = "horizontal", opts, setApi, plugins, className = "", testId, children, ...props },
     ref
   ) => {
     const [carouselRef, api] = useEmblaCarousel(
@@ -105,6 +106,7 @@ export const Carousel = React.forwardRef<
           className={`relative ${className}`}
           role="region"
           aria-roledescription="carousel"
+          data-testid={testId}
           {...props}
         >
           {children}
