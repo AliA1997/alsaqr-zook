@@ -1,7 +1,6 @@
 import { motion } from 'framer-motion';
 import React, { Suspense } from 'react';
 import PageContainer from './layout/PageContainer';
-import LoadingSpinner from './layout/LoadingSpinner';
 import { observer } from 'mobx-react-lite';
 import { useStore } from './stores';
 import { useCheckSession } from '@hooks/useCheckSession';
