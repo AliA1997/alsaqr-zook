@@ -34,6 +34,7 @@ const Feed = observer(({
         toysAndGamesFeedStore
     } = useStore();
     const [loading, setLoading] = useState<boolean>(false);
+    const [mounted, setMounted] = useState<boolean>(false);
     const containerRef = useRef(null);
     const loaderRef = useRef(null);
 
@@ -202,7 +203,7 @@ const Feed = observer(({
 
 
     useEffect(() => {
-
+        setMounted(true);
         getListings();
     }, []);
 
@@ -274,7 +275,7 @@ const Feed = observer(({
         };
     }, []);
 
-    if (loading)
+    if ((mounted || loading) && !loadedListings.length)
         return <CustomPageLoader title="Loading" />;
 
     return (

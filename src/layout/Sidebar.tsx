@@ -68,7 +68,7 @@ const SideBar = ({ }: SideBarProps) => {
           ${hideSidebar ? 'col-span-2' : 'col-span-1 md:col-span-2'}
           flex flex-col item-center mt-2 md:mt-0 md:px-4 md:items-start
           overflow-y-auto scrollbar-hide
-          max-h-[90vh] lg:max-h-[70vh]
+          max-h-[90vh] lg:max-h-[90vh]
         `}
         onClick={() => setIsDropdownOpen(false)}
       >          

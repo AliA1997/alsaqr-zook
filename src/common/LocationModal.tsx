@@ -104,6 +104,7 @@ export const LocationModal = observer(() => {
                                 dark:bg-gray-900
                                 w-[100%]
                                 resize-none cursor-pointer
+                                text-xs md:text-[0.9rem]
                             `}
                             placeholder="Location is displayed"
                             value={locationToDisplay ? locationToDisplay.displayName : ""}

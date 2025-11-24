@@ -4,11 +4,13 @@ import agent from "@utils/common";
 import { ProductRecord } from "@models/product";
 import { ProductCategories } from "@models/enums";
 import { store } from ".";
+import { makePersistable } from "mobx-persist-store";
 
 export default class PetSuppliesFeedStore {
 
     constructor() {
         makeAutoObservable(this);
+        makePersistable(this, { name: 'PetSuppliesFeedStore', properties: ['petSuppliesRegistry'], storage: window.localStorage });
 
         reaction(
             () => this.predicate.keys(),

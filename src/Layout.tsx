@@ -5,6 +5,7 @@ import LoadingSpinner from './layout/LoadingSpinner';
 import { observer } from 'mobx-react-lite';
 import { useStore } from './stores';
 import { useCheckSession } from '@hooks/useCheckSession';
+import CustomPageLoader from '@common/CustomLoader';
 
 export default observer(function ({ children }: React.PropsWithChildren<any>) {
     const { authStore } = useStore();
@@ -22,7 +23,7 @@ export default observer(function ({ children }: React.PropsWithChildren<any>) {
                     <main className="grid grid-cols-9">
                         <Suspense
                             fallback={
-                                <LoadingSpinner color="text-green-500" size="w-8 h-8" />
+                                <CustomPageLoader title='Loading' />
                             }
                         >
                             <PageContainer>{children}</PageContainer>

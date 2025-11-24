@@ -24,6 +24,8 @@ const BuyingFeed = observer(() => {
         loadingInitial
      } = userProductsFeedStore;
     const [loading, setLoading] = useState<boolean>(false);
+    const [mounted, setMounted] = useState<boolean>(false);
+
     const containerRef = useRef(null);
     const loaderRef = useRef(null);
 
@@ -58,8 +60,9 @@ const BuyingFeed = observer(() => {
     }
 
     useEffect(() => {
-
+        setMounted(true);
         getListings();
+
     }, []);
 
     // 1. Add this loader component at the end of your posts list
@@ -71,7 +74,7 @@ const BuyingFeed = observer(() => {
         );
     };
 
-    if (loading)
+    if ((mounted || loading) && !nearbyBuyingProducts.length)
         return <CustomPageLoader title="Loading" />;
 
     return (

@@ -4,18 +4,19 @@ import agent from "@utils/common";
 import { ProductRecord } from "@models/product";
 import { ProductCategories } from "@models/enums";
 import { store } from ".";
+import { makePersistable } from "mobx-persist-store";
 
 export default class ToysAndGamesFeedStore {
 
     constructor() {
         makeAutoObservable(this);
+        makePersistable(this, { name: 'ToysAndGamesFeedStore', properties: ['toysAndGamesRegistry'], storage: window.localStorage });
 
         reaction(
             () => this.predicate.keys(),
             () => {}
         );
     }
-
 
     loadingInitial = false;
     predicate = new Map();

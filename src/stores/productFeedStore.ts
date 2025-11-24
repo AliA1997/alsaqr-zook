@@ -11,7 +11,7 @@ export default class ProductFeedStore {
     constructor() {
         makeAutoObservable(this);
 
-        makePersistable(this, { name: 'ProductFeedStore', properties: ['productToViewId'], storage: window.localStorage });
+        makePersistable(this, { name: 'ProductFeedStore', properties: ['productToViewId', 'productsRegistry'], storage: window.localStorage });
 
         reaction(
             () => this.predicate.keys(),

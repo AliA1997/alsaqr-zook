@@ -24,6 +24,7 @@ const SellingFeed = observer(() => {
         nearbySellingProducts,
         loadingInitial
      } = userProductsFeedStore;
+    const [mounted, setMounted] = useState<boolean>(false);
     const [loading, setLoading] = useState<boolean>(false);
     const containerRef = useRef(null);
     const loaderRef = useRef(null);
@@ -65,7 +66,7 @@ const SellingFeed = observer(() => {
 
 
     useEffect(() => {
-
+        setMounted(true);
         getListings();
     }, []);
 
@@ -113,7 +114,7 @@ const SellingFeed = observer(() => {
         };
     }, []);
 
-    if (loading)
+    if ((mounted || loading) && !nearbySellingProducts.length)
         return <CustomPageLoader title="Loading" />;
 
     return (
