@@ -139,3 +139,25 @@ export function TagOrLabel({
         </span>
     );
 }
+
+export function ErrorText({children}: React.PropsWithChildren<any>){
+    return (
+        <span className='text-[0.75rem] text-red-600'>
+            {children}
+        </span>
+    )
+}
+
+type AlSaqrFormLabelProps = {
+    forInput: string;
+}
+export function AlSaqrFormLabel({children, forInput}: React.PropsWithChildren<AlSaqrFormLabelProps>){
+    return (
+        <label 
+            htmlFor={forInput}
+            className='text-md font-bold float-left w-full'
+        >
+            {children}
+        </label>
+    );
+}

@@ -1,8 +1,11 @@
+export interface Option {
+  value: string;
+  label: string;
+}
 
-interface CommonReduxTweetsState {
-  searchQry: string;
-  page: number;
-  limit: number;
+export interface GenericOption<ValueType> {
+  value: ValueType;
+  label: string;
 }
 
 export enum TypeOfFeed {
@@ -39,12 +42,7 @@ export enum MessageType {
 }
 
 export enum CommonUpsertBoxTypes {
-  Post = "Post",
-  List = "List",
-  Community = "Community",
-  UpdateCommunity = "Update-Community",
-  CommunityDiscussion = "CommunityDiscussion",
-  Register = "Register"
+  Product = "product"
 }
 
 

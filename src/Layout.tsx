@@ -18,7 +18,7 @@ export default observer(function ({ children }: React.PropsWithChildren<any>) {
                 className="dark:bg-[#0e1517] min-h-screen flex flex-col justify-between overflow-hidden mb-0 pb-0"
             >
 
-                <div className="mx-auto max-h-screen overflow-hidden lg:w-6xl">
+                <div className="mx-auto min-h-screen overflow-hidden lg:w-6xl mb-[15rem]">
                     <main className="grid grid-cols-9">
                         <Suspense
                             fallback={

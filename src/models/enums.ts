@@ -25,7 +25,9 @@ export enum SidebarTabs {
   OfficeSupplies = 9,
   PetSupplies = 10,
   SportingGoods = 11,
-  ToysAndGames = 12
+  ToysAndGames = 12,
+  Settings = 13,
+  SellSomething = 14
 }
 
 export enum ProductCategories {

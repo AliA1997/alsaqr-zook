@@ -88,7 +88,7 @@ export interface CategoryForProduct {
 };
 
 export interface UserIpInfo {
-  countryName: string;
+  locationDisplayName: string;
   latitude: number;
   longitude: number;
 }

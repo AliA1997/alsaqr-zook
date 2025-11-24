@@ -70,7 +70,7 @@ function SidebarRow({
     onClick: sidebarOnClick,
     animatedLink: title === SIGN_IN_TITLE || title === DELETE_YOUR_ACCOUNT,
     activeInd: active ?? false,
-    classNames: "py-[1rem]",
+    classNames: "py-[1rem] px-[0.25rem] lg:px-4",
     testId: title.toLowerCase()
   };
   const showText = useMemo(() => [SIGN_IN_TITLE, SIGN_OUT_TITLE].some((showTextTitle: string) => showTextTitle == title) || (isShow ?? false), [title]);

@@ -1,9 +1,14 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
 import type { ProductRecord } from "@models/product";
 
-export default function ProductCarousel({ product }: { product: ProductRecord }) {
+type ProductCarouselProps = {
+  product?: ProductRecord;
+  images?: string[];
+}
+
+export default function ProductCarousel({ product, images }: ProductCarouselProps) {
   const autoplay = useRef(
     Autoplay({
       delay: 7000,
@@ -26,11 +31,13 @@ export default function ProductCarousel({ product }: { product: ProductRecord })
     }
   }, [emblaApi]);
 
+  const imagesToDisplay = useMemo(() => images ? images : product?.images ?? [], [product, images]);
+
   return (
     <div className="flex-1 md:w-1/2 relative">
       <div className="overflow-hidden rounded-lg" ref={emblaRef}>
         <div className="flex">
-          {product.images.map((image: any, index: number) => (
+          {imagesToDisplay.map((image: any, index: number) => (
             <div
               key={index}
               className="relative min-w-full flex justify-center items-center"
@@ -39,7 +46,7 @@ export default function ProductCarousel({ product }: { product: ProductRecord })
               <div className="w-full pb-[100%] relative">
                 <img
                   src={image}
-                  alt={product.title}
+                  alt={product?.title ?? `Upsert Product Image ${index}`}
                   className="absolute top-0 left-0 h-full w-full object-cover rounded-lg"
                 />
               </div>

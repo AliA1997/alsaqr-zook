@@ -1,13 +1,17 @@
 import { makeAutoObservable, reaction, runInAction } from "mobx";
 import { Pagination, PagingParams } from "@models/common";
 import agent from "@utils/common";
-import { ProductRecord } from "@models/product";
+import { CreateProductForm, ProductRecord } from "@models/product";
 import { store } from ".";
+import { DEFAULT_CREATE_PRODUCT_FORM } from "@utils/constants";
+import { makePersistable } from 'mobx-persist-store';
 
 export default class ProductFeedStore {
 
     constructor() {
         makeAutoObservable(this);
+
+        makePersistable(this, { name: 'ProductFeedStore', properties: ['productToViewId'], storage: window.localStorage });
 
         reaction(
             () => this.predicate.keys(),
@@ -17,6 +21,7 @@ export default class ProductFeedStore {
 
 
     loadingInitial = false;
+    loadingUpsert = false;
     predicate = new Map();
     productToViewId: number | undefined;
     setPredicate = (predicate: string, value: string | number | Date | undefined) => {
@@ -30,7 +35,23 @@ export default class ProductFeedStore {
     pagination: Pagination | undefined = undefined;
 
     productsRegistry: Map<number, ProductRecord> = new Map<number, ProductRecord>();
+    activeMarker: number | undefined = undefined;
+    currentProductSlug: string = "";
+    createProductForm: CreateProductForm = DEFAULT_CREATE_PRODUCT_FORM;
+    createProductFormStep: number = 0;
+    setCreateProductForm = (val: CreateProductForm) => {
+        this.createProductForm = val;
+    }
+    setCreateProductFormStep = (val: number) => {
+        this.createProductFormStep = val;
+    }
 
+    setActiveMarker = (val: number | undefined) => {
+        this.activeMarker = val;
+    }
+    setCurrentProductSlug = (productSlug: string) => {
+        this.currentProductSlug = productSlug;
+    }
     setPagingParams = (pagingParams: PagingParams) => {
         this.pagingParams = pagingParams;
     }
@@ -47,6 +68,9 @@ export default class ProductFeedStore {
         this.productToViewId = productId;
     }
     
+    setLoadingUpsert = (value: boolean) => {
+        this.loadingUpsert = value;
+    }
     setLoadingInitial = (value: boolean) => {
         this.loadingInitial = value;
     }
@@ -87,6 +111,21 @@ export default class ProductFeedStore {
             this.setPagination(pagination);
         } finally {
             this.setLoadingInitial(false);
+        }
+
+    }
+
+    createProduct = async (values: CreateProductForm) => {
+
+        this.setLoadingUpsert(true);
+        
+        try {
+            await agent.productApiClient.addProduct(values) ?? [];
+            this.setCreateProductForm(DEFAULT_CREATE_PRODUCT_FORM);
+            this.setCreateProductFormStep(0);
+
+        } finally {
+            this.setLoadingUpsert(false);
         }
 
     }

@@ -5,7 +5,7 @@ import {
 } from "@common/Carousels"; // make sure this path matches your actual file name
 import type { SimilarProductRecord } from "@models/product";
 import ProductCard from "@components/products/ProductCard";
-import { HowSimilarKeys } from "@models/enums";
+import { getHowSimilarKey } from "@utils/functions";
 
 interface ProductsMarqueeProps {
   products: SimilarProductRecord[];
@@ -24,8 +24,7 @@ export default function ProductsMarquee({ products }: ProductsMarqueeProps) {
     >
       <CarouselContent className="-ml-2 px-2">
         {products.map((product, index) => {
-          const totalSimilarity = (product.titleSimilarity + product.categorySimilarity + product.descriptionSimilarity);
-          const howSimilarKey = totalSimilarity > 1.1 ? HowSimilarKeys.MostSimilar : totalSimilarity < 0.3 ? HowSimilarKeys.NotSimilar : HowSimilarKeys.KindaSimilar;
+          const howSimilarKey = getHowSimilarKey(product.titleSimilarity, product.categorySimilarity, product.descriptionSimilarity);
           return (
             <CarouselItem
               key={index}

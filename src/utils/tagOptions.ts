@@ -1,4 +1,6 @@
-export const TAG_OPTIONS = [
+import { Option } from "@typings";
+
+export const TAG_OPTIONS: Option[] = [
     {
         value: 'tech',
         label: 'Tech',

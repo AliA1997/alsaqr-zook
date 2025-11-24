@@ -17,6 +17,7 @@ import { SettingsTabs, SidebarTabs } from "@models/enums";
 import { OptimizedImage } from "@common/Image";
 import SidebarRow from "./SidebarRow";
 import Collapsible from "@common/Collapsible";
+import { LocationModal } from "@common/LocationModal";
 
 type SideBarProps = {};
 
@@ -61,15 +62,13 @@ const SideBar = ({ }: SideBarProps) => {
 
   }, [currentSessionUser?.id, mounted]);
 
-  // const onTabSelect = (tab: SidebarTabs) => setActiveTab(tab);
-
   return (
     <>
       <div className={`
           ${hideSidebar ? 'col-span-2' : 'col-span-1 md:col-span-2'}
           flex flex-col item-center mt-2 md:mt-0 md:px-4 md:items-start
           overflow-y-auto scrollbar-hide
-          max-h-[70vh]
+          max-h-[90vh] lg:max-h-[70vh]
         `}
         onClick={() => setIsDropdownOpen(false)}
       >          
@@ -169,8 +168,11 @@ const SideBar = ({ }: SideBarProps) => {
                           />
                         </>
                       }
-                      title={userIpInfo?.countryName ?? "United States"}
-                      onClick={() => setActiveTab(SidebarTabs.Location)}
+                      title={userIpInfo?.locationDisplayName ?? "United States"}
+                      onClick={() => {
+                        setActiveTab(SidebarTabs.Location);
+                        showModal(<LocationModal />)
+                      }}
                       active={activeTab === SidebarTabs.Location}
                       overrideOnClick={true}
                     />
@@ -323,6 +325,21 @@ const SideBar = ({ }: SideBarProps) => {
                                 onClick={() => {
                                   window.location.href = `${import.meta.env.VITE_PUBLIC_ALSAQR_URL}/settings`;
                                 }}
+                              />
+                              <SidebarRow 
+                                IconImage={
+                                  <>
+                                    <img
+                                      src="/icons/sell-something.svg"
+                                      alt="Sell Something Icon"
+                                      className="h-4 w-4 md:h-6 md:w-6 flex-shrink-0 mr-2 p-0"
+                                    />
+                                  </>
+                                }
+                                title="Sell Something?"
+                                href="/create-listing"
+                                onClick={() => setActiveTab(SidebarTabs.SellSomething)}
+                                active={activeTab === SidebarTabs.SellSomething}
                               />
                               <SidebarRow Icon={LogoutIcon} title="Sign Out" />
                             </>

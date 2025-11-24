@@ -1,5 +1,5 @@
 import { FALLBACK_IMAGE_URL, FALLBACK_NEWS_IMAGE_URL, FALLBACK_POST_IMAGE_URL } from '@utils/constants';
-import { MouseEventHandler, useState } from 'react';
+import { MouseEventHandler, useEffect, useState } from 'react';
 
 type CommonImageProps = {
     src: string;
@@ -86,6 +86,11 @@ export function OptimizedPostImage({
     classNames
 }: CommonImageProps) {
     const [imageUrl, setImageUrl] = useState<string>(src)
+
+    useEffect(() => {
+        if(imageUrl != src)
+            setImageUrl(src);
+    }, [src])
 
     return (
         <img

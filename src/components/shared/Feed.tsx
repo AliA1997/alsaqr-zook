@@ -6,18 +6,20 @@ import { useStore } from "@stores/index";
 import { PagingParams } from "@models/common";
 import { leadingDebounce } from "@utils/common";
 import { ContentContainerWithRef } from "@common/Containers";
-import { NoRecordsTitle } from "@common/Titles";
+import { NoRecordsTitle, PageTitle } from "@common/Titles";
 
 import CustomPageLoader from "@common/CustomLoader";
 import { ProductCategories } from "@models/enums";
 import ProductCard from "@components/products/ProductCard";
 
 interface Props {
+    title?: string;
     productCategory?: ProductCategories;
 }
 
 
 const Feed = observer(({
+    title,
     productCategory
 }: Props) => {
     const {
@@ -276,25 +278,28 @@ const Feed = observer(({
         return <CustomPageLoader title="Loading" />;
 
     return (
-        <ContentContainerWithRef
-            classNames={`
-                text-left scrollbar-hide
-            `}
-            innerRef={containerRef}
-        >
-            <div className={`
-                scrollbar-hide max-h-screen overflow-scroll 
-                dark:border-gray-800 grid w-full max-w-7xl grid-cols-2 
-                gap-4 sm:grid-cols-3 md:grid-cols-4 ${productCategory ? "" : "xl:grid-cols-5"}
-            `}>
-                {loadedListings && loadedListings.length
-                    ? loadedListings.map((listingRec) => (
-                        <ProductCard product={listingRec} key={listingRec.id} showCategory={!productCategory} />
-                    ))
-                    : <NoRecordsTitle>No Listings to show</NoRecordsTitle>}
-                <LoadMoreTrigger />
-            </div>
-        </ContentContainerWithRef>
+        <>
+            <PageTitle classNames={"lg:hidden"}>{title}</PageTitle>
+            <ContentContainerWithRef
+                classNames={`
+                    text-left scrollbar-hide
+                `}
+                innerRef={containerRef}
+            >
+                <div className={`
+                    scrollbar-hide max-h-screen overflow-scroll 
+                    dark:border-gray-800 grid w-full max-w-7xl grid-cols-2 
+                    gap-4 sm:grid-cols-3 md:grid-cols-4 ${productCategory ? "" : "xl:grid-cols-5"}
+                `}>
+                    {loadedListings && loadedListings.length
+                        ? loadedListings.map((listingRec) => (
+                            <ProductCard product={listingRec} key={listingRec.id} showCategory={!productCategory} />
+                        ))
+                        : <NoRecordsTitle>No Listings to show</NoRecordsTitle>}
+                    <LoadMoreTrigger />
+                </div>
+            </ContentContainerWithRef>
+        </>
     );
 });
 

@@ -1,10 +1,9 @@
 import { Margin, Options, Resolution } from "react-to-pdf";
 import { CreateListOrCommunityForm, UserRegisterForm } from "@typings";
+import { CreateProductForm } from "@models/product";
+import { ProductCategories } from "@models/enums";
 
 export const ROUTES_USER_CANT_ACCESS = [
-  '/communities',
-  '/bookmarks',
-  '/lists',
   '/messages',
   '/notifications'
 ];
@@ -168,16 +167,16 @@ export const PREFERRED_MADHAB_OPTIONS = [
 
 
 export const FREQUENT_MASJID_OPTIONS = [
-  {"label": "5 times a day (for prayers)", "value": "5 times a day (for prayers)"},
-  {"label": "Daily", "value": "Daily"},
-  {"label": "Several times a week", "value": "Several times a week"},
-  {"label": "Once a week", "value": "Once a week"},
-  {"label": "Every Jummah (Friday prayers)", "value": "Every Jummah (Friday prayers)"},
-  {"label": "A few times a month", "value": "A few times a month"},
-  {"label": "Only on Eid", "value": "Only on Eid"},
-  {"label": "Rarely", "value": "Rarely"},
-  {"label": "Never", "value": "Never"},
-  {"label": "Other", "value": "Other"}
+  { "label": "5 times a day (for prayers)", "value": "5 times a day (for prayers)" },
+  { "label": "Daily", "value": "Daily" },
+  { "label": "Several times a week", "value": "Several times a week" },
+  { "label": "Once a week", "value": "Once a week" },
+  { "label": "Every Jummah (Friday prayers)", "value": "Every Jummah (Friday prayers)" },
+  { "label": "A few times a month", "value": "A few times a month" },
+  { "label": "Only on Eid", "value": "Only on Eid" },
+  { "label": "Rarely", "value": "Rarely" },
+  { "label": "Never", "value": "Never" },
+  { "label": "Other", "value": "Other" }
 ];
 
 export const FAVORITE_QURAN_RECITER_OPTIONS = [
@@ -215,50 +214,50 @@ export const FAVORITE_QURAN_RECITER_OPTIONS = [
 ];
 
 export const ISLAMIC_SCHOLARS_OPTIONS = [
-  {"label": "Abu Hanifa / أبو حنيفة النعمان", "value": "Abu Hanifa / أبو حنيفة النعمان"},
-  {"label": "Malik ibn Anas / مالك بن أنس", "value": "Malik ibn Anas / مالك بن أنس"},
-  {"label": "Al-Shafi'i / الشافعي", "value": "Al-Shafi'i / الشافعي"},
-  {"label": "Ahmad ibn Hanbal / أحمد بن حنبل", "value": "Ahmad ibn Hanbal / أحمد بن حنبل"},
-  {"label": "Al-Bukhari / البخاري", "value": "Al-Bukhari / البخاري"},
-  {"label": "Muslim ibn al-Hajjaj / مسلم بن الحجاج", "value": "Muslim ibn al-Hajjaj / مسلم بن الحجاج"},
-  {"label": "Al-Tirmidhi / الترمذي", "value": "Al-Tirmidhi / الترمذي"},
-  {"label": "Ibn Majah / ابن ماجه", "value": "Ibn Majah / ابن ماجه"},
-  {"label": "Abu Dawood / أبو داود", "value": "Abu Dawood / أبو داود"},
-  {"label": "Al-Nasa'i / النسائي", "value": "Al-Nasa'i / النسائي"},
-  {"label": "Ibn Taymiyyah / ابن تيمية", "value": "Ibn Taymiyyah / ابن تيمية"},
-  {"label": "Ibn Qayyim al-Jawziyya / ابن قيم الجوزية", "value": "Ibn Qayyim al-Jawziyya / ابن قيم الجوزية"},
-  {"label": "Al-Ghazali / الغزالي", "value": "Al-Ghazali / الغزالي"},
-  {"label": "Ibn Sina / ابن سينا", "value": "Ibn Sina / ابن سينا"},
-  {"label": "Ibn Rushd / ابن رشد", "value": "Ibn Rushd / ابن رشد"},
-  {"label": "Ibn Khaldun / ابن خلدون", "value": "Ibn Khaldun / ابن خلدون"},
-  {"label": "Al-Tabari / الطبري", "value": "Al-Tabari / الطبري"},
-  {"label": "Ibn Kathir / ابن كثير", "value": "Ibn Kathir / ابن كثير"},
-  {"label": "Al-Suyuti / السيوطي", "value": "Al-Suyuti / السيوطي"},
-  {"label": "Al-Qurtubi / القرطبي", "value": "Al-Qurtubi / القرطبي"},
-  {"label": "Muhammad ibn Abdul Wahhab / محمد بن عبد الوهاب", "value": "Muhammad ibn Abdul Wahhab / محمد بن عبد الوهاب"},
-  {"label": "Rashid Rida / رشيد رضا", "value": "Rashid Rida / رشيد رضا"},
-  {"label": "Hassan al-Banna / حسن البنا", "value": "Hassan al-Banna / حسن البنا"},
-  {"label": "Sayyid Qutb / سيد قطب", "value": "Sayyid Qutb / سيد قطب"},
-  {"label": "Yusuf al-Qaradawi / يوسف القرضاوي", "value": "Yusuf al-Qaradawi / يوسف القرضاوي"},
-  {"label": "Muhammad Nasiruddin al-Albani / محمد ناصر الدين الألباني", "value": "Muhammad Nasiruddin al-Albani / محمد ناصر الدين الألباني"},
-  {"label": "Abdullah ibn Baz / عبد الله بن باز", "value": "Abdullah ibn Baz / عبد الله بن باز"},
-  {"label": "Muhammad ibn al-Uthaymeen / محمد بن صالح العثيمين", "value": "Muhammad ibn al-Uthaymeen / محمد بن صالح العثيمين"},
-  {"label": "Tariq Ramadan / طارق رمضان", "value": "Tariq Ramadan / طارق رمضان"},
-  {"label": "Zakir Naik / زاكر نايك", "value": "Zakir Naik / زاكر نايك"},
-  {"label": "Jalaluddin Rumi / جلال الدين الرومي", "value": "Jalaluddin Rumi / جلال الدين الرومي"},
-  {"label": "Ibn Arabi / ابن عربي", "value": "Ibn Arabi / ابن عربي"},
-  {"label": "Al-Junayd / الجنيد البغدادي", "value": "Al-Junayd / الجنيد البغدادي"},
-  {"label": "Abdul Qadir Gilani / عبد القادر الجيلاني", "value": "Abdul Qadir Gilani / عبد القادر الجيلاني"},
-  {"label": "Ahmad al-Tijani / أحمد التيجاني", "value": "Ahmad al-Tijani / أحمد التيجاني"},
-  {"label": "Aisha bint Abu Bakr / عائشة بنت أبي بكر", "value": "Aisha bint Abu Bakr / عائشة بنت أبي بكر"},
-  {"label": "Fatima al-Fihri / فاطمة الفهري", "value": "Fatima al-Fihri / فاطمة الفهري"},
-  {"label": "Umm al-Darda / أم الدرداء", "value": "Umm al-Darda / أم الدرداء"},
-  {"label": "Rabia al-Adawiyya / رابعة العدوية", "value": "Rabia al-Adawiyya / رابعة العدوية"},
-  {"label": "Shuhda al-Baghdadiyya / شهدة البغدادية", "value": "Shuhda al-Baghdadiyya / شهدة البغدادية"},
-  {"label": "Zaynab bint Kamal / زينب بنت كمال", "value": "Zaynab bint Kamal / زينب بنت كمال"},
-  {"label": "Aisha Abdurrahman (Bint al-Shati) / عائشة عبد الرحمن (بنت الشاطئ)", "value": "Aisha Abdurrahman (Bint al-Shati) / عائشة عبد الرحمن (بنت الشاطئ)"},
-  {"label": "Zainab Alwani / زينب العلواني", "value": "Zainab Alwani / زينب العلواني"},
-  {"label": "Other / أخرى", "value": "Other / أخرى"}
+  { "label": "Abu Hanifa / أبو حنيفة النعمان", "value": "Abu Hanifa / أبو حنيفة النعمان" },
+  { "label": "Malik ibn Anas / مالك بن أنس", "value": "Malik ibn Anas / مالك بن أنس" },
+  { "label": "Al-Shafi'i / الشافعي", "value": "Al-Shafi'i / الشافعي" },
+  { "label": "Ahmad ibn Hanbal / أحمد بن حنبل", "value": "Ahmad ibn Hanbal / أحمد بن حنبل" },
+  { "label": "Al-Bukhari / البخاري", "value": "Al-Bukhari / البخاري" },
+  { "label": "Muslim ibn al-Hajjaj / مسلم بن الحجاج", "value": "Muslim ibn al-Hajjaj / مسلم بن الحجاج" },
+  { "label": "Al-Tirmidhi / الترمذي", "value": "Al-Tirmidhi / الترمذي" },
+  { "label": "Ibn Majah / ابن ماجه", "value": "Ibn Majah / ابن ماجه" },
+  { "label": "Abu Dawood / أبو داود", "value": "Abu Dawood / أبو داود" },
+  { "label": "Al-Nasa'i / النسائي", "value": "Al-Nasa'i / النسائي" },
+  { "label": "Ibn Taymiyyah / ابن تيمية", "value": "Ibn Taymiyyah / ابن تيمية" },
+  { "label": "Ibn Qayyim al-Jawziyya / ابن قيم الجوزية", "value": "Ibn Qayyim al-Jawziyya / ابن قيم الجوزية" },
+  { "label": "Al-Ghazali / الغزالي", "value": "Al-Ghazali / الغزالي" },
+  { "label": "Ibn Sina / ابن سينا", "value": "Ibn Sina / ابن سينا" },
+  { "label": "Ibn Rushd / ابن رشد", "value": "Ibn Rushd / ابن رشد" },
+  { "label": "Ibn Khaldun / ابن خلدون", "value": "Ibn Khaldun / ابن خلدون" },
+  { "label": "Al-Tabari / الطبري", "value": "Al-Tabari / الطبري" },
+  { "label": "Ibn Kathir / ابن كثير", "value": "Ibn Kathir / ابن كثير" },
+  { "label": "Al-Suyuti / السيوطي", "value": "Al-Suyuti / السيوطي" },
+  { "label": "Al-Qurtubi / القرطبي", "value": "Al-Qurtubi / القرطبي" },
+  { "label": "Muhammad ibn Abdul Wahhab / محمد بن عبد الوهاب", "value": "Muhammad ibn Abdul Wahhab / محمد بن عبد الوهاب" },
+  { "label": "Rashid Rida / رشيد رضا", "value": "Rashid Rida / رشيد رضا" },
+  { "label": "Hassan al-Banna / حسن البنا", "value": "Hassan al-Banna / حسن البنا" },
+  { "label": "Sayyid Qutb / سيد قطب", "value": "Sayyid Qutb / سيد قطب" },
+  { "label": "Yusuf al-Qaradawi / يوسف القرضاوي", "value": "Yusuf al-Qaradawi / يوسف القرضاوي" },
+  { "label": "Muhammad Nasiruddin al-Albani / محمد ناصر الدين الألباني", "value": "Muhammad Nasiruddin al-Albani / محمد ناصر الدين الألباني" },
+  { "label": "Abdullah ibn Baz / عبد الله بن باز", "value": "Abdullah ibn Baz / عبد الله بن باز" },
+  { "label": "Muhammad ibn al-Uthaymeen / محمد بن صالح العثيمين", "value": "Muhammad ibn al-Uthaymeen / محمد بن صالح العثيمين" },
+  { "label": "Tariq Ramadan / طارق رمضان", "value": "Tariq Ramadan / طارق رمضان" },
+  { "label": "Zakir Naik / زاكر نايك", "value": "Zakir Naik / زاكر نايك" },
+  { "label": "Jalaluddin Rumi / جلال الدين الرومي", "value": "Jalaluddin Rumi / جلال الدين الرومي" },
+  { "label": "Ibn Arabi / ابن عربي", "value": "Ibn Arabi / ابن عربي" },
+  { "label": "Al-Junayd / الجنيد البغدادي", "value": "Al-Junayd / الجنيد البغدادي" },
+  { "label": "Abdul Qadir Gilani / عبد القادر الجيلاني", "value": "Abdul Qadir Gilani / عبد القادر الجيلاني" },
+  { "label": "Ahmad al-Tijani / أحمد التيجاني", "value": "Ahmad al-Tijani / أحمد التيجاني" },
+  { "label": "Aisha bint Abu Bakr / عائشة بنت أبي بكر", "value": "Aisha bint Abu Bakr / عائشة بنت أبي بكر" },
+  { "label": "Fatima al-Fihri / فاطمة الفهري", "value": "Fatima al-Fihri / فاطمة الفهري" },
+  { "label": "Umm al-Darda / أم الدرداء", "value": "Umm al-Darda / أم الدرداء" },
+  { "label": "Rabia al-Adawiyya / رابعة العدوية", "value": "Rabia al-Adawiyya / رابعة العدوية" },
+  { "label": "Shuhda al-Baghdadiyya / شهدة البغدادية", "value": "Shuhda al-Baghdadiyya / شهدة البغدادية" },
+  { "label": "Zaynab bint Kamal / زينب بنت كمال", "value": "Zaynab bint Kamal / زينب بنت كمال" },
+  { "label": "Aisha Abdurrahman (Bint al-Shati) / عائشة عبد الرحمن (بنت الشاطئ)", "value": "Aisha Abdurrahman (Bint al-Shati) / عائشة عبد الرحمن (بنت الشاطئ)" },
+  { "label": "Zainab Alwani / زينب العلواني", "value": "Zainab Alwani / زينب العلواني" },
+  { "label": "Other / أخرى", "value": "Other / أخرى" }
 ]
 
 export const ISLAMIC_STUDY_TOPICS_OPTIONS = [
@@ -335,39 +334,39 @@ export const ROUTE_TO_SHOW_SETTINGS_SIDEBAR = '/settings';
 export const DELETE_YOUR_ACCOUNT = 'Delete Your Account';
 
 export const REACT_TO_PDF_CONFIG: Options = {
-   // default is `save`
-   method: 'open',
-   // default is Resolution.MEDIUM = 3, which should be enough, higher values
-   // increases the image quality but also the size of the PDF, so be careful
-   // using values higher than 10 when having multiple pages generated, it
-   // might cause the page to crash or hang.
-   resolution: Resolution.HIGH,
-   page: {
-      // margin is in MM, default is Margin.NONE = 0
-      margin: Margin.LARGE,
-      // default is 'A4'
-      format: 'letter',
-      // default is 'portrait'
-      orientation: 'portrait',
-   },
-   canvas: {
-      // default is 'image/jpeg' for better size performance
-      mimeType: 'image/png',
-      qualityRatio: 1,
-   },
-   // Customize any value passed to the jsPDF instance and html2canvas
-   // function. You probably will not need this and things can break, 
-   // so use with caution.
-   overrides: {
-      // see https://artskydj.github.io/jsPDF/docs/jsPDF.html for more options
-      pdf: {
-         compress: true
-      },
-      // see https://html2canvas.hertzen.com/configuration for more options
-      canvas: {
-         useCORS: true
-      }
-   },
+  // default is `save`
+  method: 'open',
+  // default is Resolution.MEDIUM = 3, which should be enough, higher values
+  // increases the image quality but also the size of the PDF, so be careful
+  // using values higher than 10 when having multiple pages generated, it
+  // might cause the page to crash or hang.
+  resolution: Resolution.HIGH,
+  page: {
+    // margin is in MM, default is Margin.NONE = 0
+    margin: Margin.LARGE,
+    // default is 'A4'
+    format: 'letter',
+    // default is 'portrait'
+    orientation: 'portrait',
+  },
+  canvas: {
+    // default is 'image/jpeg' for better size performance
+    mimeType: 'image/png',
+    qualityRatio: 1,
+  },
+  // Customize any value passed to the jsPDF instance and html2canvas
+  // function. You probably will not need this and things can break, 
+  // so use with caution.
+  overrides: {
+    // see https://artskydj.github.io/jsPDF/docs/jsPDF.html for more options
+    pdf: {
+      compress: true
+    },
+    // see https://html2canvas.hertzen.com/configuration for more options
+    canvas: {
+      useCORS: true
+    }
+  },
 };
 
 export const INVITATION_EXPIRE_TIME = (24 * 60 * 60 * 1000) * 3
@@ -378,30 +377,33 @@ export const FALLBACK_NEWS_IMAGE_URL = "/explore-news-placeholder.svg";
 
 export const FALLBACK_POST_IMAGE_URL = "/post-placeholder.svg";
 
-export const EXPLORE_SOURCES = [
-  {
-    id: "al-jazeera-english",
-    name: "Al Jazeera English",
-    image: "/explore-sources/aljazeeraenglish.svg",
-  },
-  {
-    id: "argaam",
-    name: "Argaam",
-    image: "/explore-sources/argaam.svg",
-  },
-  {
-    id: "bleacher-report",
-    name: "Bleacher Report",
-    image: "/explore-sources/bleacher-report.svg",
-  },
-  {
-    id: "crypto-coins-news",
-    name: "Crypto Coins News",
-    image: "/explore-sources/cryptocoinnews.svg",
-  },
-  {
-    id: "sabq",
-    name: "SABQ",
-    image: "/explore-sources/sabq.svg",
-  },
-]
+export const LAST_CREATE_PRODUCT_FORM_STEP = 2;
+export const DEFAULT_CREATE_PRODUCT_FORM: CreateProductForm = {
+  title: "",
+  description: "",
+  price: undefined,
+  attributes: undefined,
+  productCategoryId: ProductCategories.Clothing,
+  images: [],
+  latitude: undefined,
+  longitude: undefined,
+  country: "United States",
+  tags: []
+};
+
+export const PRODUCT_CATEGORY_OPTIONS = [
+  { value: ProductCategories.Clothing, label: 'Clothing' },
+  { value: ProductCategories.Electronics, label: 'Electronics' },
+  { value: ProductCategories.OfficeSupplies, label: 'Office Supplies' },
+  { value: ProductCategories.PetSupplies, label: 'Pet Supplies' },
+  { value: ProductCategories.Rentals, label: 'Rentals' },
+  { value: ProductCategories.SportingGoods, label: 'Sporting Goods' },
+  { value: ProductCategories.ToysAndGames, label: 'Toys And Games' },
+  { value: ProductCategories.Vehicles, label: 'Vehicles' },
+];
+
+
+export const NOT_ALLOWED_NSFW_CHECKER_RESULTS = {
+  "Somewhat Explicit": 'Somewhat Explicit',
+  'Very Explicit': 'Very Explicit'
+};

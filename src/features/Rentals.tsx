@@ -5,6 +5,6 @@ import { observer } from "mobx-react-lite";
 
 export default observer(function() {
     return (
-        <Feed productCategory={ProductCategories.Rentals} />
+        <Feed title="Rentals for Sale" productCategory={ProductCategories.Rentals} />
     );
 })

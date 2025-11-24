@@ -1,8 +1,6 @@
-;
 import { useStore } from '@stores/index';
 import { observer } from 'mobx-react-lite';
-// components/Modal.tsx
-import React, { useState } from 'react';
+import React, { CSSProperties, useState } from 'react';
 import { createPortal } from 'react-dom';
 
 interface ModalBodyProps {
@@ -11,12 +9,13 @@ interface ModalBodyProps {
   children: React.ReactNode;
   headerChildren?: React.ReactNode;
   classNames?: string;
+  style?: CSSProperties;
 }
 
-const ModalBody = ({ onClose, headerChildren, children, classNames }: ModalBodyProps) => {
+const ModalBody = ({ onClose, headerChildren, children, classNames, ...otherProps }: ModalBodyProps) => {
 
   return (
-    <div className={`fixed inset-0 z-[999] flex items-center justify-center bg-white dark:bg-black h-screen ${classNames ?? ""}`}>
+    <div className={`fixed inset-0 z-[999] flex items-center justify-center bg-white dark:bg-black h-screen ${classNames ?? ""}`} {...otherProps}>
       <div className="relative bg-white dark:bg-[#000000] rounded-lg shadow-lg w-11/12 max-w-lg mx-auto">
         <div className="relative p-4">
           {headerChildren
@@ -24,7 +23,8 @@ const ModalBody = ({ onClose, headerChildren, children, classNames }: ModalBodyP
             : (
               <button
                 onClick={onClose}
-                className="absolute right-5 top-3 text-gray-400 hover:text-gray-600 block float-right"
+                style={{ background: 'transparent' }}
+                className="absolute right-5 top-0 text-gray-400 hover:text-gray-600 block float-right"
               >
                 <svg
                   className="w-6 h-6"

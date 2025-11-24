@@ -81,3 +81,11 @@ export function InfoCardContainer({ children, classNames }: React.PropsWithChild
     </div>
   );
 }
+
+export function InputContainer({ children }: React.PropsWithChildren<any>){
+  return (
+    <div className="d-flex flex-col text-left justify-start">
+      {children}
+    </div>
+  );
+}

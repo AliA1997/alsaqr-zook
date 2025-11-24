@@ -15,6 +15,7 @@ import Buying from "@features/Buying";
 import Selling from "@features/Selling";
 import Messages from "@features/Messages";
 import Notifications from "@features/Notifications";
+import CreateListingPage from "@features/CreateListingPage";
 
 export const routes: RouteObject[] = [
   {
@@ -22,6 +23,7 @@ export const routes: RouteObject[] = [
     children: [
       { index: true, element: <HomePage /> },
       { path: '/products/:productSlug', element: <ListingPage /> },
+      { path: '/create-listing', element: <CreateListingPage /> },
       { path: '/buying', element: <Buying /> },
       { path: '/selling', element: <Selling /> },
       { path: '/clothing', element: <Clothing /> },
