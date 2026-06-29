@@ -1,5 +1,6 @@
 import axios, { AxiosResponse, AxiosError } from 'axios';
 import { PaginatedResult } from '../models/common';
+import Auth from './auth';
 import { listApiClient } from "./listsApiClient";
 import { notificationApiClient } from "./notificationApiClient";
 import { userApiClient } from "./userApiClient";
@@ -28,6 +29,18 @@ export const extractQryParams = (request: any, paramsToExtract: string[]): (stri
 }
 
 axios.defaults.baseURL = `${import.meta.env.VITE_PUBLIC_BASE_API_URL}`;
+
+
+const auth = new Auth();
+axios.interceptors.request.use((config) => {
+  const token = auth.getToken();
+  if (token) {
+    config.headers = config.headers ?? {};
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
+});
+
 export const axiosResponseBody = (res: AxiosResponse) => res.data;
 
 export const axiosRequests = {

@@ -16,6 +16,7 @@ import Selling from "@features/Selling";
 import Messages from "@features/Messages";
 import Notifications from "@features/Notifications";
 import CreateListingPage from "@features/CreateListingPage";
+import AdminDashboard from "@features/AdminDashboard";
 
 export const routes: RouteObject[] = [
   {
@@ -26,6 +27,7 @@ export const routes: RouteObject[] = [
       { path: '/create-listing', element: <CreateListingPage /> },
       { path: '/buying', element: <Buying /> },
       { path: '/selling', element: <Selling /> },
+      { path: '/admin', element: <AdminDashboard /> },
       { path: '/clothing', element: <Clothing /> },
       { path: '/electronics', element: <Electronics /> },
       { path: '/office-supplies', element: <OfficeSupplies /> },

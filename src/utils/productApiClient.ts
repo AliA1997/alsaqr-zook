@@ -9,6 +9,8 @@ export const productApiClient = {
         axiosRequests.post(`/api/Products`, { values }).then(axiosResponseBody),
     updateProduct: (values: UpdateProductForm, productId: number) =>
         axiosRequests.put(`/api/Products/${productId}`, { values }).then(axiosResponseBody),
+    deleteProduct: (productId: number) =>
+        axiosRequests.del(`/api/Products/${productId}`).then(axiosResponseBody),
     getSellingProducts: (params: URLSearchParams | undefined) =>
         axios.get(`/api/UserProducts/selling`, { params }).then(axiosResponseBody),
     getBuyingProducts: (params: URLSearchParams | undefined) =>

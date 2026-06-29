@@ -1,5 +1,6 @@
 
 import React, { useLayoutEffect, useRef } from "react";
+import { Toaster } from "react-hot-toast";
 import SideBar from "./Sidebar";
 import { useStore } from "@stores/index";
 import { observer } from "mobx-react-lite";
@@ -44,6 +45,7 @@ const PageContainer = ({
         {children ? children : null}
       </div>
       {modalToShow && modalToShow}
+      <Toaster position="bottom-center" />
     </>
   );
 };

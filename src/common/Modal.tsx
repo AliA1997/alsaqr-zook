@@ -15,7 +15,7 @@ interface ModalBodyProps {
 const ModalBody = ({ onClose, headerChildren, children, classNames, ...otherProps }: ModalBodyProps) => {
 
   return (
-    <div className={`fixed inset-0 z-[999] flex items-center justify-center bg-white dark:bg-black h-screen ${classNames ?? ""}`} {...otherProps}>
+    <div className={`fixed inset-0 z-[999] flex items-center justify-center bg-black/75 h-screen ${classNames ?? ""}`} {...otherProps}>
       <div className="relative bg-white dark:bg-[#000000] rounded-lg shadow-lg w-11/12 max-w-lg mx-auto">
         <div className="relative p-4">
           {headerChildren
@@ -47,14 +47,6 @@ const ModalBody = ({ onClose, headerChildren, children, classNames, ...otherProp
         <div className="flex flex-col align-center justify-center p-4">
           {children}
         </div>
-        {/* <div className="flex justify-end p-4 border-t border-gray-200">
-          <button
-            onClick={onClose}
-            className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
-          >
-            Close
-          </button>
-        </div> */}
       </div>
     </div>
   );

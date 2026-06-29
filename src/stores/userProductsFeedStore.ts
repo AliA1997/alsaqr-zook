@@ -1,7 +1,7 @@
 import { makeAutoObservable, reaction, runInAction } from "mobx";
 import { Pagination, PagingParams } from "@models/common";
 import agent from "@utils/common";
-import { ProductRecord } from "@models/product";
+import { ProductRecord, UpdateProductForm } from "@models/product";
 import { store } from ".";
 import { makePersistable } from "mobx-persist-store";
 
@@ -115,6 +115,42 @@ export default class UserProductsFeedStore {
 
     }
 
+
+    // Owner-only edit. The bearer token lets the API enforce that only the creator
+    // can mutate the listing; this keeps the local selling registry in sync on success.
+    updateProduct = async (values: UpdateProductForm, productId: number) => {
+        await agent.productApiClient.updateProduct(values, productId);
+
+        runInAction(() => {
+            const existing = this.sellingProductsRegistry.get(productId);
+            if (existing) {
+                this.setSellingProduct(productId, { ...existing, ...this.toRecordPatch(values) });
+            }
+        });
+    }
+
+    // Owner-only delete. Removes the listing from the selling registry on success.
+    deleteProduct = async (productId: number) => {
+        await agent.productApiClient.deleteProduct(productId);
+
+        runInAction(() => {
+            this.sellingProductsRegistry.delete(productId);
+        });
+    }
+
+    // Map the editable subset of UpdateProductForm onto the ProductRecord shape so the
+    // card reflects the change without a full reload.
+    private toRecordPatch = (values: UpdateProductForm): Partial<ProductRecord> => {
+        const patch: Partial<ProductRecord> = {};
+        if (values.title !== undefined) patch.title = values.title;
+        if (values.description !== undefined) patch.description = values.description;
+        if (values.price !== undefined) patch.price = values.price;
+        if (values.tags !== undefined) patch.tags = values.tags;
+        if (values.attributes !== undefined) patch.attributes = values.attributes;
+        if (values.productCategoryId !== undefined) patch.productCategoryId = values.productCategoryId;
+        if (values.images !== undefined) patch.images = values.images;
+        return patch;
+    }
 
     get nearbySellingProducts() {
         return Array.from(this.sellingProductsRegistry.values());
