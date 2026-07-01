@@ -383,7 +383,7 @@ export const DEFAULT_CREATE_PRODUCT_FORM: CreateProductForm = {
   description: "",
   price: undefined,
   attributes: undefined,
-  productCategoryId: ProductCategories.Clothing,
+  productCategoryId: '',
   images: [],
   latitude: undefined,
   longitude: undefined,

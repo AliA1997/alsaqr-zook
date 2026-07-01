@@ -1,7 +1,6 @@
 import Collapsible from "@common/Collapsible";
 import { MapView } from "@common/Map";
 import { CreateProductForm } from "@models/product";
-import { PRODUCT_CATEGORY_OPTIONS } from "@utils/constants";
 import { useState } from "react";
 
 type ReviewUpsertProductStepProps = {
@@ -38,10 +37,6 @@ export function ReviewUpsertProductStep({ values }: ReviewUpsertProductStepProps
                     <div className='text-left'>
                         <span className="font-semibold underline">Price:</span>{" "}
                         {values.price !== undefined ? `$${values.price.toLocaleString('en-US')}` : <span className="italic text-gray-500">Not provided</span>}
-                    </div>
-                    <div className='text-left'>
-                        <span className="font-semibold underline">Category:</span>{" "}
-                        {values.productCategoryId ? PRODUCT_CATEGORY_OPTIONS.find(opt => opt.value === values.productCategoryId)?.label ?? "" : <span className="italic text-gray-500">Not provided</span>}
                     </div>
 
                     {/* Attributes displayed as a table */}
