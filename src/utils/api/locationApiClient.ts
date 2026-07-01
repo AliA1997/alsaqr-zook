@@ -1,5 +1,5 @@
 import axios from "axios";
-import { axiosResponseBody } from "./common";
+import { axiosResponseBody } from "./agent";
 
 export const locationApiClient = {
     getIpAddress: () =>

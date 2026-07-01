@@ -9,15 +9,17 @@ interface ModalBodyProps {
   children: React.ReactNode;
   headerChildren?: React.ReactNode;
   classNames?: string;
+  // Applied to the inner content box; override to widen a modal. Defaults to max-w-lg.
+  contentClassNames?: string;
   style?: CSSProperties;
 }
 
-const ModalBody = ({ onClose, headerChildren, children, classNames, ...otherProps }: ModalBodyProps) => {
+const ModalBody = ({ onClose, headerChildren, children, classNames, contentClassNames, ...otherProps }: ModalBodyProps) => {
 
   return (
-    <div className={`fixed inset-0 z-[999] flex items-center justify-center bg-black/75 h-screen ${classNames ?? ""}`} {...otherProps}>
-      <div className="relative bg-white dark:bg-[#000000] rounded-lg shadow-lg w-11/12 max-w-lg mx-auto">
-        <div className="relative p-4">
+    <div className={`fixed inset-0 z-[999] flex items-center justify-center bg-black/75 h-screen p-3 sm:p-4 ${classNames ?? ""}`} {...otherProps}>
+      <div className={`relative bg-white dark:bg-[#000000] rounded-lg shadow-lg w-full mx-auto flex flex-col max-h-[90vh] ${contentClassNames ?? "max-w-lg"}`}>
+        <div className="relative p-4 shrink-0">
           {headerChildren
             ? headerChildren
             : (
@@ -44,7 +46,7 @@ const ModalBody = ({ onClose, headerChildren, children, classNames, ...otherProp
             )}
 
         </div>
-        <div className="flex flex-col align-center justify-center p-4">
+        <div className="flex flex-col p-4 pt-0 overflow-y-auto overflow-x-hidden flex-1 min-h-0">
           {children}
         </div>
       </div>

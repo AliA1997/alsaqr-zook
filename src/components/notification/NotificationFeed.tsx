@@ -5,9 +5,8 @@ import { useStore } from "@stores/index";
 import { PagingParams } from "@models/common";
 import { NoRecordsTitle, PageTitle } from "@common/Titles";
 import { ContentContainerWithRef } from "@common/Containers";
-import CustomPageLoader from "@common/CustomLoader";
+import { SkeletonLoader } from "@common/CustomLoader";
 import NotificationItemComponent from "./NotificationItem";
-import { leadingDebounce } from "@utils/common";
 
 interface Props { }
 
@@ -34,8 +33,6 @@ const NotificationFeed = observer(({ }: Props) => {
 
 
   async function getNotifications() {
-    leadingDebounce(async () => {
-
       try {
         const paramsFromQryString = convertQueryStringToObject(
           window.location.search
@@ -55,7 +52,6 @@ const NotificationFeed = observer(({ }: Props) => {
           await loadNotifications(userId);
       } finally {
       }
-    }, 10000);
   }
 
   const fetchMoreItems = async (pageNum: number) => {
@@ -84,7 +80,7 @@ const NotificationFeed = observer(({ }: Props) => {
     const observer = new IntersectionObserver(
       (entries) => {
         const firstEntry = entries[0];
-        const currentPage = pagination?.currentPage ?? 0;
+        const currentPage = pagination?.currentPage ?? 1;
         const itemsPerPage = pagination?.itemsPerPage ?? 10;
         const totalItems = pagination?.totalItems ?? 0;
 
@@ -126,13 +122,13 @@ const NotificationFeed = observer(({ }: Props) => {
         ref={containerRef}
       >
         {loadingInitial ? (
-          <CustomPageLoader title="Loading" />
+          <SkeletonLoader count={4} />
         ) : (
           <>
             {notifications && notifications.length
               ? notifications.map((notificationRecord, notificationKey) => (
                 <NotificationItemComponent
-                  key={notificationRecord.notification.id ?? notificationKey}
+                  key={notificationRecord.notificationId ?? notificationKey}
                   notificationToDisplay={notificationRecord}
                 />
               ))

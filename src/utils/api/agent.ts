@@ -1,6 +1,5 @@
 import axios, { AxiosResponse, AxiosError } from 'axios';
-import { PaginatedResult } from '../models/common';
-import Auth from './auth';
+import { PaginatedResult } from '../../models/common';
 import { listApiClient } from "./listsApiClient";
 import { notificationApiClient } from "./notificationApiClient";
 import { userApiClient } from "./userApiClient";
@@ -8,6 +7,7 @@ import { messageApiClient } from "./messageApiClient";
 import { commentApiClient } from "./commentApiClient";
 import { productApiClient } from "./productApiClient";
 import { locationApiClient } from './locationApiClient';
+import { supabase } from '../infrastructure/supabase';
 
 export const extractQryParams = (request: any, paramsToExtract: string[]): (string | null)[] => {
   const qryParams = new URL(request.url!).searchParams;
@@ -31,13 +31,15 @@ export const extractQryParams = (request: any, paramsToExtract: string[]): (stri
 axios.defaults.baseURL = `${import.meta.env.VITE_PUBLIC_BASE_API_URL}`;
 
 
-const auth = new Auth();
-axios.interceptors.request.use((config) => {
-  const token = auth.getToken();
+// Attach jwt from supabase.
+axios.interceptors.request.use(async (config) => {
+  const { data } = await supabase.auth.getSession();
+  const token = data.session?.access_token;
+
   if (token) {
-    config.headers = config.headers ?? {};
     config.headers.Authorization = `Bearer ${token}`;
   }
+
   return config;
 });
 
@@ -51,6 +53,7 @@ export const axiosRequests = {
   patch: <T>(url: string, body: {}) => axios.patch<T>(url, body).then(axiosResponseBody),
   del: <T>(url: string) => axios.delete<T>(url).then(axiosResponseBody),
 };
+
 
 axios.interceptors.response.use(
   async (response) => {

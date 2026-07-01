@@ -4,13 +4,14 @@ import { convertQueryStringToObject } from "@utils/index";
 import { observer } from "mobx-react-lite";
 import { useStore } from "@stores/index";
 import { PagingParams } from "@models/common";
-import { leadingDebounce } from "@utils/common";
+import { leadingDebounce } from "@utils/api/agent";
 import { ContentContainerWithRef } from "@common/Containers";
 import { NoRecordsTitle, PageTitle } from "@common/Titles";
 
-import CustomPageLoader from "@common/CustomLoader";
+
 import { ProductCategories } from "@models/enums";
 import ProductCard from "@components/products/ProductCard";
+import { SkeletonLoader } from "@common/CustomLoader";
 
 interface Props {
     title?: string;
@@ -276,7 +277,7 @@ const Feed = observer(({
     }, []);
 
     if ((mounted || loading) && !loadedListings.length)
-        return <CustomPageLoader title="Loading" />;
+        return <SkeletonLoader count={7} />;
 
     return (
         <>

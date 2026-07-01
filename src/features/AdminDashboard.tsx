@@ -4,9 +4,10 @@ import { useStore } from "@stores/index";
 import { OptimizedImage } from "@common/Image";
 import { CommonLink } from "@common/Links";
 import { NoRecordsTitle } from "@common/Titles";
-import CustomPageLoader from "@common/CustomLoader";
 import ProductCard from "@components/products/ProductCard";
 import ProductOwnerActions from "@components/userProducts/ProductOwnerActions";
+import UpsertEntityButton from "@common/UpsertEntityButton";
+import { SkeletonLoader } from "@common/CustomLoader";
 
 const ALSAQR_PROFILE_BASE = `${import.meta.env.VITE_PUBLIC_ALSAQR_URL}/users`;
 
@@ -51,11 +52,13 @@ const AdminDashboard = observer(() => {
                                     />
                                 </div>
                             </div>
-                            <div className="flex shrink-0 items-start justify-end">
+                            <div className="flex shrink-0 items-start justify-center gap-2 lg:justify-end">
                                 {currentSessionUser ? (
+                                    <>
+                                    <UpsertEntityButton />
                                     <CommonLink
                                         animatedLink={false}
-                                        classNames="border border-[0.1rem] hover:text-[#55a8c2]"
+                                        classNames="py-3 text-md lg:text-lg border border-[0.1rem] hover:text-[#55a8c2]"
                                         onClick={() =>
                                             window.open(
                                                 `${ALSAQR_PROFILE_BASE}/${currentSessionUser.username}`,
@@ -66,6 +69,7 @@ const AdminDashboard = observer(() => {
                                     >
                                         View on AlSaqr
                                     </CommonLink>
+                                    </>
                                 ) : null}
                             </div>
                         </div>
@@ -86,7 +90,7 @@ const AdminDashboard = observer(() => {
 
                 <div className="p-4" data-testid="adminDashboardListings">
                     {loadingInitial && ownedProducts.length === 0 ? (
-                        <CustomPageLoader title="Loading" />
+                        <SkeletonLoader count={4} />
                     ) : ownedProducts.length ? (
                         <div className="grid w-full grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4">
                             {ownedProducts.map((product) => (

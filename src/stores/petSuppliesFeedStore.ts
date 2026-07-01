@@ -1,6 +1,6 @@
 import { makeAutoObservable, reaction, runInAction } from "mobx";
 import { Pagination, PagingParams } from "@models/common";
-import agent from "@utils/common";
+import agent from "@utils/api/agent";
 import { ProductRecord } from "@models/product";
 import { ProductCategories } from "@models/enums";
 import { store } from ".";

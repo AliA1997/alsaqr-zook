@@ -1,8 +1,9 @@
 import axios from "axios";
-import { axiosRequests, axiosResponseBody } from "./common";
+import { axiosRequests, axiosResponseBody } from "./agent";
 import { CreateProductForm, UpdateProductForm } from "@models/product";
 
 export const productApiClient = {
+    getCategories: () => axiosRequests.get(`/api/Category`).then(axiosResponseBody),
     getCategory: (categoryId: number) => 
         axiosRequests.get(`/api/Category/${categoryId}`).then(axiosResponseBody),
     addProduct: (values: CreateProductForm) =>

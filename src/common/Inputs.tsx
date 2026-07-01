@@ -137,6 +137,8 @@ export default function AlSaqrMultiImageUpload({
     // input change
     const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
         await processFiles(e.target.files);
+        // Reset so selecting the same file(s) again still fires onChange.
+        e.target.value = "";
     };
 
     // drag/drop
@@ -174,7 +176,7 @@ export default function AlSaqrMultiImageUpload({
             className="w-full max-w-full mx-auto"
         >
             {/* Upload input */}
-            <label className="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:border-blue-400 z-[999]">
+            <label className="flex flex-col items-center justify-center w-full h-16 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:border-blue-400 z-[999]">
                 <span className="text-gray-500">Click or drag images here</span>
                 <input
                     type="file"
@@ -187,12 +189,12 @@ export default function AlSaqrMultiImageUpload({
 
             {/* Preview grid */}
             {images && images.length > 0 && (
-                <div className="mt-4 grid grid-cols-4 lg:grid-cols-7 gap-3">
+                <div className="mt-3 grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-5 gap-2">
                     {images.map((fileBase64, idx) => {
                         return (
                             <div
                                 key={idx}
-                                className="relative w-28 h-28 rounded overflow-hidden border"
+                                className="relative aspect-square w-full rounded overflow-hidden border"
                             >
                                 <img
                                     src={fileBase64}

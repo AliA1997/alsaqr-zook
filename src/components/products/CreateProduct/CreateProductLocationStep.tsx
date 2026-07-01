@@ -2,7 +2,7 @@ import { DraggableMap } from "@common/Map";
 import { CheckIcon, ClipboardCopyIcon } from "@heroicons/react/solid";
 import { CreateProductForm } from "@models/product";
 import { useStore } from "@stores/index";
-import { locationApiClient } from "@utils/locationApiClient";
+import { locationApiClient } from "@utils/api/locationApiClient";
 import { FormikErrors } from "formik";
 import { observer } from "mobx-react-lite";
 import { useCallback, useEffect, useState } from "react";

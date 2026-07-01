@@ -1,7 +1,7 @@
 import { makeAutoObservable, runInAction } from "mobx";
 import { MessageFormDto, MessageHistoryToDisplay, MessageToDisplay, ProfileUser } from "@typings";
 import { Pagination, PagingParams } from "@models/common";
-import agent from "@utils/common";
+import agent from "@utils/api/agent";
 
 export default class MessageStore {
     constructor() {
@@ -50,7 +50,7 @@ export default class MessageStore {
         this.loadingHistory = val;
     }
     setDirectMessage = (message: MessageToDisplay) => {
-        this.directMessageRegistry.set(message.message.id, message);
+        this.directMessageRegistry.set(message.messageId, message);
     }
 
     setDirectMessageHistory = (messageHistory: MessageHistoryToDisplay) => {
@@ -85,7 +85,7 @@ export default class MessageStore {
             this.predicate.set('senderId', senderId);
             this.predicate.set('receiverId', receiverId);
 
-            const { items, pagination } = await agent.messageApiClient.loadDirectMessages(senderId, this.axiosParams);
+            const { items, pagination } = await agent.messageApiClient.loadDirectMessages(this.axiosParams);
 
             runInAction(() => {
                 items.map((messageItem: MessageToDisplay) => this.setDirectMessage(messageItem));
@@ -98,14 +98,14 @@ export default class MessageStore {
 
     }
 
-    loadDirectMessageHistory = async (senderId: string) => {
+    loadDirectMessageHistory = async () => {
 
         this.setLoadingHistory(true);
     
         this.directMessageHistoryRegistry.clear();
         try {
 
-            const { items, pagination } = await agent.messageApiClient.loadDirectMessageHistory(senderId, this.axiosParams);
+            const { items, pagination } = await agent.messageApiClient.loadDirectMessageThreads(this.axiosParams);
 
             runInAction(() => {
                 items.map((messageItem: MessageHistoryToDisplay) => this.setDirectMessageHistory(messageItem));
@@ -118,10 +118,10 @@ export default class MessageStore {
 
     }
 
-    sendDirectMessage = async (messageForm: MessageFormDto, userId: string) => {
+    sendDirectMessage = async (messageForm: MessageFormDto) => {
         this.setLoadingUpsert(true);
         try {
-            await agent.messageApiClient.sendDirectMessage(messageForm, userId);
+            await agent.messageApiClient.sendDirectMessage(messageForm);
 
         } finally {
             this.setLoadingUpsert(false);

@@ -1,6 +1,6 @@
 import { makeAutoObservable, reaction, runInAction } from "mobx";
 import { Pagination, PagingParams } from "@models/common";
-import agent from "@utils/common";
+import agent from "@utils/api/agent";
 import { ProductRecord, UpdateProductForm } from "@models/product";
 import { store } from ".";
 import { makePersistable } from "mobx-persist-store";

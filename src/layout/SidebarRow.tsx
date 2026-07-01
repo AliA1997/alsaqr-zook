@@ -6,7 +6,7 @@ import { observer } from "mobx-react-lite";
 import { useStore } from "@stores/index";
 import { LoginModal } from "@common/AuthModals";
 import { useNavigate } from "react-router-dom";
-import { supabase } from "@utils/supabase";
+import { supabase } from "@utils/infrastructure/supabase";
 
 interface SidebarRowProps {
   Icon?: (props: SVGProps<SVGSVGElement>) => JSX.Element;
@@ -70,7 +70,7 @@ function SidebarRow({
     onClick: sidebarOnClick,
     animatedLink: title === SIGN_IN_TITLE || title === DELETE_YOUR_ACCOUNT,
     activeInd: active ?? false,
-    classNames: "py-[1rem] px-[0.25rem] lg:px-4",
+    classNames: "py-[1rem]",
     testId: title.toLowerCase()
   };
   const showText = useMemo(() => [SIGN_IN_TITLE, SIGN_OUT_TITLE].some((showTextTitle: string) => showTextTitle == title) || (isShow ?? false), [title]);

@@ -1,5 +1,6 @@
 import { useStore } from "@stores/index";
 import { observer } from "mobx-react-lite";
+import toast from "react-hot-toast";
 import { Formik, FormikErrors } from 'formik';
 import { motion } from 'framer-motion';
 import { CreateProductForm } from "@models/product";
@@ -9,14 +10,21 @@ import { DEFAULT_CREATE_PRODUCT_FORM, LAST_CREATE_PRODUCT_FORM_STEP, NOT_ALLOWED
 
 import { FooterButtons } from "@common/Buttons";
 import { CommonUpsertBoxTypes } from "@typings";
-import { checkNsfwInImage, initializeClient } from "@utils/gradio";
+import { checkNsfwInImage, initializeClient } from "@utils/infrastructure/gradio";
 import { DangerAlert } from "@common/Alerts";
 import CreateProductLocationStep from "./CreateProduct/CreateProductLocationStep";
 import { CreateProductFieldsStep } from "./CreateProduct/CreateProductFieldsStep";
 import { ReviewUpsertProductStep } from "./ReviewUpsertProductStep";
 
 
-export default observer(() => {
+type CreateProductFormProps = {
+    // Optional callback fired after a product is created successfully — lets the
+    // create modal close itself and refresh the dashboard. Undefined on the
+    // standalone /create-listing page, where it's a no-op.
+    onSuccess?: () => void;
+};
+
+export default observer(({ onSuccess }: CreateProductFormProps) => {
     const { productFeedStore } = useStore();
     const {
         createProduct,
@@ -34,8 +42,10 @@ export default observer(() => {
         try {
             await createProduct(values);
             setValues(DEFAULT_CREATE_PRODUCT_FORM);
+            toast("Listing created.", { icon: "✅" });
+            onSuccess?.();
         } catch {
-            console.log("Their was a problem when creating a product for yourself")
+            toast.error("There was a problem creating your listing.");
         }
     }
 

@@ -1,11 +1,11 @@
 import { ContentContainerWithRef } from "@common/Containers";
-import CustomPageLoader from "@common/CustomLoader";
+import { SkeletonLoader } from "@common/CustomLoader";
 import { MapView } from "@common/Map";
 import ProductDetailCard from "@components/productDetails/ProductDetailsCard";
 import ProductsMarquee from "@components/products/ProductMarquee";
 import type { ProductRecord, SimilarProductRecord } from "@models/product";
 import { useStore } from "@stores/index";
-import { productApiClient } from "@utils/productApiClient";
+import { productApiClient } from "@utils/api/productApiClient";
 import { observer } from "mobx-react-lite";
 import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router";
@@ -61,7 +61,7 @@ export default observer(() => {
     }, [productSlug])
 
     if (!loadedProduct || !loadedSimilarProducts)
-        return <CustomPageLoader title="Loading" />;
+        return <SkeletonLoader count={6} />;
 
     return (
         <ContentContainerWithRef

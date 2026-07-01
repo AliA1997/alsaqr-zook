@@ -1,7 +1,7 @@
 import { ModalBody, ModalPortal } from "@common/Modal";
 import { useStore } from "@stores/index";
 import { observer } from "mobx-react-lite";
-import { supabase } from "@utils/supabase";
+import { supabase } from "@utils/infrastructure/supabase";
 import { ROUTES_USER_CANT_ACCESS } from "@utils/constants";
 import { useLocation } from "react-router";
 
@@ -21,22 +21,20 @@ export const LoginModal = observer(() => {
   const handleFacebookSignIn = () => supabase.auth.signInWithOAuth({
     provider: "facebook",
   });
-  
+
   return (
     <ModalPortal>
-      <ModalBody 
-        onClose={() => {
+      <ModalBody onClose={() => {
         const canCloseLoginModal = !(ROUTES_USER_CANT_ACCESS.some(r => pathname.includes(r)));
 
         if (canCloseLoginModal || currentSessionUser)
           closeModal();
 
-        }}
-      >
-        <div className='flex flex-col justify-center' data-testid="loginmodal">
+      }}>
+        <div className='flex flex-col justify-center'>
           <button
             className={`
-              flex items-center p-3 border rounded-lg font-medium 
+              flex items-center p-3 border rounded-lg font-medium
               text-gray-600 border-gray-300 hover:bg-gray-100 hover:text-gray-800
               dark:text-gray-200 dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:text-white
            `}
@@ -54,7 +52,7 @@ export const LoginModal = observer(() => {
 
           <button
             className={`
-              flex items-center p-3 border rounded-lg font-medium 
+              flex items-center p-3 border rounded-lg font-medium
               text-gray-600 border-gray-300 hover:bg-gray-100 hover:text-gray-800
               dark:text-gray-200 dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:text-white
             `}
@@ -69,10 +67,10 @@ export const LoginModal = observer(() => {
             />
             Sign in with Facebook
           </button>
-          
+
           <button
             className={`
-                  flex items-center p-3 border rounded-lg font-medium 
+                  flex items-center p-3 border rounded-lg font-medium
                   text-gray-600 border-gray-300 hover:bg-gray-100 hover:text-gray-800
                   dark:text-gray-200 dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:text-white
                 `}

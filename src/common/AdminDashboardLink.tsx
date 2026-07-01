@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 
-// Entry point to the Admin Dashboard, rendered at the top of the Selling page so a
-// member can jump to managing (editing / deleting) the listings they're selling.
+
 export default function AdminDashboardLink() {
     return (
         <div className="w-full px-4 pt-4">

@@ -8,6 +8,7 @@ import { ThemeProvider } from './ThemeProvider.tsx'
 
 store.commonStore.loadIpInfo().then(() => console.log('loaded ip info'));
 store.authStore.initializeFromStorage().then(() => console.log("Welcome to alsaqr"));
+store.productFeedStore.loadProductCategories().then(() => console.log("Loaded product categories"));
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

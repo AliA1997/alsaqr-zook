@@ -1,6 +1,6 @@
 import { makeAutoObservable, reaction, runInAction } from "mobx";
 import { Pagination, PagingParams } from "@models/common";
-import agent from "@utils/common";
+import agent from "@utils/api/agent";
 import { CreateProductForm, ProductRecord } from "@models/product";
 import { store } from ".";
 import { DEFAULT_CREATE_PRODUCT_FORM } from "@utils/constants";
@@ -33,6 +33,11 @@ export default class ProductFeedStore {
     }
     pagingParams: PagingParams = new PagingParams(1, 25);
     pagination: Pagination | undefined = undefined;
+
+    productCategories: { id: number, name: string }[] = [];
+    setProductCategories = (categories: { id: number, name: string }[]) => {
+        this.productCategories = categories;
+    }
 
     productsRegistry: Map<number, ProductRecord> = new Map<number, ProductRecord>();
     activeMarker: number | undefined = undefined;
@@ -113,6 +118,16 @@ export default class ProductFeedStore {
             this.setLoadingInitial(false);
         }
 
+    }
+
+    loadProductCategories = async () => {
+        try {
+            const { items } = await agent.productApiClient.getCategories() ?? [];   
+            debugger;
+            this.setProductCategories(items);
+        } catch (error) {
+            console.error("Error loading product categories:", error);
+        }
     }
 
     createProduct = async (values: CreateProductForm) => {

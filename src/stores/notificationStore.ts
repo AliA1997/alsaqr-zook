@@ -1,7 +1,7 @@
 import { makeAutoObservable, reaction, runInAction } from "mobx";
 import { NotificationToDisplay } from "@typings";
 import { Pagination, PagingParams } from "@models/common";
-import agent from "@utils/common";
+import agent from "@utils/api/agent";
 
 export default class NotificationStore {
 
@@ -72,7 +72,7 @@ export default class NotificationStore {
 
             runInAction(() => {
                 items.forEach((not: NotificationToDisplay) => {
-                    this.setNotification(not.notification.id, not);
+                    this.setNotification(not.notificationId, not);
                 });
 
             });

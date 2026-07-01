@@ -1,6 +1,6 @@
 import { useLayoutEffect } from "react";
-import { supabase } from "@utils/supabase";
-import { userApiClient } from "@utils/userApiClient";
+import { supabase } from "@utils/infrastructure/supabase";
+import { userApiClient } from "@utils/api/userApiClient";
 import { User } from "typings";
 import { useLocation } from "react-router";
 

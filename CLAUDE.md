@@ -177,7 +177,7 @@ export default agent;
 import { makeAutoObservable, runInAction } from "mobx";
 import { Pagination, PagingParams } from "@models/common";
 import { ProductRecord } from "@models/product";
-import agent from "@utils/common";
+import agent from "@utils/api/agent";
 import { store } from ".";
 
 export default class ProductsFeedStore {

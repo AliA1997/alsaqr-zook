@@ -1,10 +1,9 @@
 import { observer } from "mobx-react-lite";
-import toast from "react-hot-toast";
 import { useStore } from "@stores/index";
 import { ProductRecord } from "@models/product";
-import { ModalBody, ModalPortal, ConfirmModal } from "@common/Modal";
 import { AbsoluteDangerButton, InfoButton } from "@common/Buttons";
-import EditProductForm from "./EditProductForm";
+import UpsertProductModal from "./UpsertProductModal";
+import DeleteProductModal from "./DeleteProductModal";
 
 interface ProductOwnerActionsProps {
     product: ProductRecord;
@@ -16,7 +15,7 @@ interface ProductOwnerActionsProps {
 const ProductOwnerActions = observer(({ product }: ProductOwnerActionsProps) => {
     const { authStore, userProductsFeedStore, modalStore } = useStore();
     const { currentSessionUser } = authStore;
-    const { deleteProduct } = userProductsFeedStore;
+    const { loadSellingProducts } = userProductsFeedStore;
     const { showModal, closeModal } = modalStore;
 
     const isOwner = !!currentSessionUser && currentSessionUser.id === product.userId;
@@ -24,32 +23,19 @@ const ProductOwnerActions = observer(({ product }: ProductOwnerActionsProps) => 
 
     const openEdit = () =>
         showModal(
-            <ModalPortal>
-                <ModalBody onClose={closeModal}>
-                    <EditProductForm product={product} onClose={closeModal} />
-                </ModalBody>
-            </ModalPortal>
+            <UpsertProductModal
+                product={product}
+                onClose={closeModal}
+                onSuccess={loadSellingProducts}
+            />
         );
 
     const openDelete = () =>
         showModal(
-            <ConfirmModal
-                title="Delete listing"
-                confirmMessage={`Are you sure you want to delete "${product.title}"? This cannot be undone.`}
+            <DeleteProductModal
+                product={product}
                 onClose={closeModal}
-                declineButtonText="Cancel"
-                confirmButtonText="Delete"
-                confirmButtonClassNames="bg-red-500"
-                confirmFunc={async () => {
-                    try {
-                        await deleteProduct(product.id);
-                        toast("Listing deleted.", { icon: "🗑️" });
-                    } catch {
-                        toast.error("Could not delete this listing.");
-                    } finally {
-                        closeModal();
-                    }
-                }}
+                onSuccess={loadSellingProducts}
             />
         );
 

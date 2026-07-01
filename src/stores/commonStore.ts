@@ -2,7 +2,7 @@ import { makeAutoObservable, reaction } from "mobx";
 import Auth from "../utils/auth";
 import { ServerError } from "typings";
 import { UserIpInfo } from "@models/common";
-import agent from "@utils/common";
+import agent from "@utils/api/agent";
 import { store } from ".";
 
 export default class CommonStore {

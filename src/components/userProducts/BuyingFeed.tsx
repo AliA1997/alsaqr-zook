@@ -3,12 +3,12 @@ import { convertQueryStringToObject } from "@utils/index";
 import { observer } from "mobx-react-lite";
 import { useStore } from "@stores/index";
 import { PagingParams } from "@models/common";
-import { leadingDebounce } from "@utils/common";
+import { leadingDebounce } from "@utils/api/agent";
 import { ContentContainerWithRef } from "@common/Containers";
 import { NoRecordsTitle } from "@common/Titles";
 
-import CustomPageLoader from "@common/CustomLoader";
 import ProductCard from "@components/products/ProductCard";
+import { SkeletonLoader } from "@common/CustomLoader";
 
 
 const BuyingFeed = observer(() => {
@@ -75,7 +75,7 @@ const BuyingFeed = observer(() => {
     };
 
     if ((mounted || loading) && !nearbyBuyingProducts.length)
-        return <CustomPageLoader title="Loading" />;
+        return <SkeletonLoader count={7} />;
 
     return (
         <ContentContainerWithRef

@@ -261,41 +261,27 @@ export interface CommunityAdminInfo {
   invitedCount: number;
   joinedCount: number;
 }
-// CALL apoc.trigger.add('create_list_notification', 
-// 'UNWIND $createdNodes AS node
-//  WHERE labels(node)[0] = "List"
-//  MATCH (owner:User)-[:OWNS]->(node)
-//  CREATE (n:Notification {
-//    id: apoc.text.format("notification_%s", [randomUUID()]),
-//    message: "New list created by " + owner.username,
-//    read: false,
-//    relatedEntityId: node.id,
-//     link: null,
-//    createdAt: datetime(),
-//    updatedAt: null,
-//    _rev: null,
-//    _type: "notification",
-//    notificationType: "new_list"
-//  })
-//  CREATE (n)-[:NOTIFIES]->(owner)
-//  RETURN count(*)', 
-// {phase: 'after'})
+
 export interface NotificationRecord extends CommonRecordBody {
-  id: string;
-  message: string;
-  read: boolean;
-  relatedEntityId?: string;
+  notificationId: string;
+  userId: string;
+  notificationMessage: string;
+  notificationType: string;
+  isRead: boolean;
   link?: string;
-  createdAt: string;
-  updatedAt: string;
-  _rev: string;
-  _type: "notification";
-  notificationType: NotificationType;
+  relatedUserId?: string;
+  postId?: string;
+  communityId?: string;
+  communityDiscussionId?: string;
+  communityDiscussionMessageId?: string;
+  listId?: string;
+  listItemId?: string;
+  notificationCreatedAt: string;
+  notificationUpdatedAt: string;
 }
 
-export interface NotificationToDisplay {
-  notification: NotificationRecord,
-}
+
+export interface NotificationToDisplay extends NotificationRecord {}
 
 export interface ServerError {
   statusCode: number;
@@ -303,37 +289,36 @@ export interface ServerError {
   details: string;
 }
 
-// Direct Message Relationships
-// Sender -> SEND_MESSAGE -> Recipient
-// Recipient -> RECEIVED_MESSAGE -> Sender
-export interface MessageFormDto extends CommonRecordBody {
-  messageType: MessageType;
+
+
+export interface MessageFormDto {
   senderId: string;
   senderProfileImg?: string;
   senderUsername?: string;
   recipientId?: string;
   recipientProfileImg?: string;
   recipientUsername?: string;
+  text: string;
+  image?: string;
 }
 
 export interface MessageRecord extends CommonRecordBody {
-  id: string;
-  createdAt: string;
-  updatedAt: string;
-  _rev: string;
-  _type: "message";
-  messageType: MessageType;
+  messageId: string;
   senderId?: string;
-  senderProfileImg?: string;
   senderUsername?: string;
+  senderAvatar?: string;
   recipientId?: string;
-  recipientProfileImg?: string;
+  recipientAvatar?: string;
   recipientUsername?: string;
+  messageContent?: string;
+  messageMedia?; string;
+  isRead?: boolean;
+
+  messageCreatedAt: Date;
+  messageUpdatedAt: Date;
 }
 
-export interface MessageToDisplay {
-  message: MessageRecord,
-}
+export interface MessageToDisplay extends MessageRecord {}
 
 export interface MessageHistoryToDisplay {
   id: string;
