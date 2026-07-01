@@ -254,6 +254,9 @@ const UpsertProductModal = observer(
     ): UpdateProductForm => {
       const ip = commonStore.userIpInfo;
       const form: UpdateProductForm = {
+        title: product?.title ?? '',
+        description: product?.description ?? '',
+        productCategoryId: product?.productCategoryId ?? '',
         latitude: product?.latitude!,
         longitude: product?.longitude!,
       };
