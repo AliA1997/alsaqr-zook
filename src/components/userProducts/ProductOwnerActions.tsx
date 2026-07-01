@@ -9,9 +9,7 @@ interface ProductOwnerActionsProps {
     product: ProductRecord;
 }
 
-// Renders edit/delete controls only when the logged-in user created the listing.
-// The API enforces this server-side too (via the bearer token); this only hides the
-// controls from non-owners. Every mutation is gated behind the custom confirm modal.
+
 const ProductOwnerActions = observer(({ product }: ProductOwnerActionsProps) => {
     const { authStore, userProductsFeedStore, modalStore } = useStore();
     const { currentSessionUser } = authStore;
@@ -41,8 +39,8 @@ const ProductOwnerActions = observer(({ product }: ProductOwnerActionsProps) => 
 
     return (
         <div className="flex gap-2 px-2 py-2">
-            <InfoButton classNames="bg-[#55a8c2] text-white" onClick={openEdit}>Edit</InfoButton>
-            <AbsoluteDangerButton onClick={openDelete}>Delete</AbsoluteDangerButton>
+            <InfoButton classNames="bg-[#55a8c2] text-white rounded" onClick={openEdit}>Edit</InfoButton>
+            <AbsoluteDangerButton classNames="bg-red-500 hover:bg-red-600 text-white rounded" onClick={openDelete}>Delete</AbsoluteDangerButton>
         </div>
     );
 });

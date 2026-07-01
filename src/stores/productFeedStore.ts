@@ -34,8 +34,8 @@ export default class ProductFeedStore {
     pagingParams: PagingParams = new PagingParams(1, 25);
     pagination: Pagination | undefined = undefined;
 
-    productCategories: { id: number, name: string }[] = [];
-    setProductCategories = (categories: { id: number, name: string }[]) => {
+    productCategories: { id: string, name: string }[] = [];
+    setProductCategories = (categories: { id: string, name: string }[]) => {
         this.productCategories = categories;
     }
 
@@ -122,9 +122,9 @@ export default class ProductFeedStore {
 
     loadProductCategories = async () => {
         try {
-            const { items } = await agent.productApiClient.getCategories() ?? [];   
-            debugger;
-            this.setProductCategories(items);
+            const { items } = await agent.productApiClient.getCategories();
+
+            this.setProductCategories(items ?? []);
         } catch (error) {
             console.error("Error loading product categories:", error);
         }

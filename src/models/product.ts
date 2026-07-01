@@ -4,16 +4,12 @@ export interface UpdateProductForm {
     description?: string;
     price?: number;
     attributes?: { [key:string]: any };
-    productCategoryId?: number;
+    productCategoryId?: string;
     images?: string[];
-    latLong?: string;
+    latitude: number;
+    longitude: number;
     country?: string;
     tags?: string[];
-    fieldsToUpdate: string[];
-}
-
-export interface ProductToDisplay {
-    product: ProductRecord;
 }
 
 export interface ProductRecord {
@@ -26,7 +22,7 @@ export interface ProductRecord {
     slug: string;
     attributes: { [key: string]: any };
     tags: string[];
-    productCategoryId: number;
+    productCategoryId: string;
     category: string;
     latitude: number;
     longitude: number;
@@ -51,7 +47,7 @@ export interface CreateProductForm {
     description?: string | undefined;
     price?: number | undefined;
     attributes?: { [key: string]: any } | undefined;
-    productCategoryId?: number | undefined;
+    productCategoryId?: string | undefined;
     images?: string[] | undefined;
     latitude?: number | undefined;
     longitude?: number | undefined;

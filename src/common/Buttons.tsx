@@ -6,7 +6,8 @@ import { CommonUpsertBoxTypes } from "typings";
 
 type CommonButtonProps = {
     disabled?: boolean;
-    onClick: MouseEventHandler<HTMLButtonElement>
+    onClick: MouseEventHandler<HTMLButtonElement>;
+    classNames: string;
 }
 
 
@@ -72,7 +73,7 @@ export function AbsoluteSuccessButton({ children, disabled, onClick, }: React.Pr
     );
 }
 
-export function AbsoluteDangerButton({ children, disabled, onClick }: React.PropsWithChildren<CommonButtonProps>) {
+export function AbsoluteDangerButton({ children, disabled, onClick, classNames }: React.PropsWithChildren<CommonButtonProps>) {
 
     return (
         <button
@@ -90,6 +91,7 @@ export function AbsoluteDangerButton({ children, disabled, onClick }: React.Prop
                 text-xs
                 border-none
                 flex
+                ${classNames ? classNames : ''}
             `}
         >
             {children}

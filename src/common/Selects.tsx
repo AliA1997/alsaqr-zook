@@ -180,11 +180,13 @@ type AlSaqrSelectProps<ValueType> = {
     label: string;
     name: string;
     options: GenericOption<ValueType>[];
+    placeholder?: string;
 }
 
 export function AlSaqrSelect<ValueType>({
   name,
   options,
+  placeholder
 }: AlSaqrSelectProps<ValueType>) {
   const [field, meta, helpers] = useField<ValueType>(name);
   const [showCountrySelect, setShowCountrySelect] = useState(false);
@@ -205,8 +207,9 @@ export function AlSaqrSelect<ValueType>({
           ${meta.error ? 'border-red-500' : 'border-gray-800'}
           bg-white text-gray-900 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500`}
       >
-        <span className="block w-full truncate">
-          {selectedOption?.label ?? 'Select Country Of Origin'} ▼
+        <span className="block w-full truncate flex justify-between">
+          {selectedOption?.label ?? placeholder ?? 'Select Country Of Origin'} 
+          <span>▼</span>
         </span>
       </button>
 
@@ -221,21 +224,21 @@ export function AlSaqrSelect<ValueType>({
           role="listbox"
           aria-labelledby={field.name}
         >
-          {options.map((productCategory, idx) => (
+          {options.map((option, idx) => (
             <div
               key={idx}
               className="cursor-pointer px-3 py-2 hover:bg-gray-100"
               onClick={() => {
-                helpers.setValue(productCategory.value);
+                helpers.setValue(option.value);
                 setShowCountrySelect(false);
               }}
               onDoubleClick={() => {
                 setShowCountrySelect(false);
               }}
               role="option"
-              aria-selected={field.value === productCategory.value}
+              aria-selected={field.value === option.value}
             >
-              {productCategory.label}
+              {option.label}
             </div>
           ))}
         </div>

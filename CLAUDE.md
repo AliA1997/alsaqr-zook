@@ -116,8 +116,7 @@ export interface ProductRecord {
 
 // models/productCategory.ts
 export interface ProductCategoryRecord {
-  id: number;
-  slug: string;
+  id: string;
   name: string;
 }
 ```
