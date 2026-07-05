@@ -3,7 +3,7 @@ import { axiosRequests, axiosResponseBody } from "./agent";
 
 export const userApiClient = {
     sessionSignin: (email: string) => 
-        axiosRequests.post(`/api/session/signin`, { values: { email } }).then(axiosResponseBody),
+        axiosRequests.post(`/api/auth/signin`, { values: { email } }).then(axiosResponseBody),
     sessionCheck: (email: string) => 
         axios.post(`/api/session/check `, { values: { email } }, { headers: {
             "Content-Type": "application/json"
