@@ -95,12 +95,7 @@ export interface User extends UserInfo {
   geoId?: string;
   maritalStatus?: 'single' | 'married' | 'divorced' | 'widowed';
   hobbies?: string[];
-  religion?: "Christian" | "Muslim" | "Atheist" | "Agnostic" | "Jew" | "Prefer Not To Disclose";
-  preferredMadhab?: 'Hanafi' | "Shafi'i" | 'Maliki' | 'Hanbali' | "Salafi" | "Prefer Not To Disclose";
-  frequentMasjid?: string;
-  favoriteQuranReciters?: string[];
-  favoriteIslamicScholars?: string[];
-  islamicStudyTopics?: string[];
+  religion?: "Agnostic" | "Atheist" | "Christian" | "Jewish" | "Muslim" | "Prefer Not To Disclose";
   followingUsers: string[];
   followedByUsers: string[];
   isCompleted: boolean;
@@ -362,11 +357,6 @@ export interface PersonalInfo {
 
 export interface PersonalInterests {
   hobbies?: string[];
-  preferredMadhab?: 'Hanafi' | "Shafi'i" | 'Maliki' | 'Hanbali' | "Salafi";
-  frequentMasjid?: string;
-  favoriteQuranReciters?: string[];
-  favoriteIslamicScholars?: string[];
-  islamicStudyTopics?: string[];
 }
 
 // Relationship types

@@ -1,7 +1,11 @@
 import Auth from '@utils/auth';
 import { DEFAULT_USER_REGISTRATION_FORM } from '@utils/constants';
 import { makeAutoObservable } from 'mobx';
-import { User, UserRegisterForm } from 'typings';
+import type {
+  UserRegisterForm,
+  User
+// @ts-ignore: external URL import for runtime bundler
+} from "https://cdn.jsdelivr.net/gh/AliA1997/alsaqr-core-web/dist/alsaqr-web-core.js";
 
 
 export default class AuthStore {
