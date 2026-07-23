@@ -1,6 +1,10 @@
 import { makeAutoObservable, reaction, runInAction } from "mobx";
 import { Pagination, PagingParams } from "@models/common";
-import agent from "@utils/api/agent";
+import {
+  commonAgent,
+// @ts-ignore: external URL import for runtime bundler
+} from "https://cdn.jsdelivr.net/gh/AliA1997/alsaqr-core-web@v0.0.5/dist/alsaqr-web-core.js";
+
 import { ProductRecord, UpdateProductForm } from "@models/product";
 import { store } from ".";
 import { makePersistable } from "mobx-persist-store";
@@ -77,7 +81,7 @@ export default class UserProductsFeedStore {
         
         try {
             this.sellingProductsRegistry.clear();
-            const { items, pagination } = await agent.productApiClient.getSellingProducts(this.axiosParams) ?? [];
+            const { items, pagination } = await commonAgent.productApiClient.getSellingProducts(this.axiosParams) ?? [];
 
             runInAction(() => {
                 items.forEach((product: ProductRecord) => {
@@ -99,7 +103,7 @@ export default class UserProductsFeedStore {
         
         try {
             this.sellingProductsRegistry.clear();
-            const { items, pagination } = await agent.productApiClient.getBuyingProducts(this.axiosParams) ?? [];
+            const { items, pagination } = await commonAgent.productApiClient.getBuyingProducts(this.axiosParams) ?? [];
 
             runInAction(() => {
                 items.forEach((product: ProductRecord) => {
@@ -119,7 +123,7 @@ export default class UserProductsFeedStore {
     // Owner-only edit. The bearer token lets the API enforce that only the creator
     // can mutate the listing; this keeps the local selling registry in sync on success.
     updateProduct = async (values: UpdateProductForm, productId: number) => {
-        await agent.productApiClient.updateProduct(values, productId);
+        await commonAgent.productApiClient.updateProduct(values, productId);
 
         runInAction(() => {
             const existing = this.sellingProductsRegistry.get(productId);
@@ -131,7 +135,7 @@ export default class UserProductsFeedStore {
 
     // Owner-only delete. Removes the listing from the selling registry on success.
     deleteProduct = async (productId: number) => {
-        await agent.productApiClient.deleteProduct(productId);
+        await commonAgent.productApiClient.deleteProduct(productId);
 
         runInAction(() => {
             this.sellingProductsRegistry.delete(productId);

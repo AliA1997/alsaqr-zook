@@ -5,7 +5,10 @@ import ProductDetailCard from "@components/productDetails/ProductDetailsCard";
 import ProductsMarquee from "@components/products/ProductMarquee";
 import type { ProductRecord, SimilarProductRecord } from "@models/product";
 import { useStore } from "@stores/index";
-import { productApiClient } from "@utils/api/productApiClient";
+import {
+  commonAgent,
+// @ts-ignore: external URL import for runtime bundler
+} from "https://cdn.jsdelivr.net/gh/AliA1997/alsaqr-core-web@v0.0.5/dist/alsaqr-web-core.js";
 import { observer } from "mobx-react-lite";
 import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router";
@@ -36,14 +39,14 @@ export default observer(() => {
     }
     async function getProduct() {
         const urlParams = getUrlParams();
-        const { product } = await productApiClient.getProduct(urlParams, productToViewId!);
+        const { product } = await commonAgent.productApiClient.getProduct(urlParams, productToViewId!);
 
         setLoadedProduct(product);
     }
 
     async function getSimilarProducts() {
         const urlParams = getUrlParams();
-        const { similarProducts } = await productApiClient.getSimilarProducts(urlParams, productToViewId!);
+        const { similarProducts } = await commonAgent.productApiClient.getSimilarProducts(urlParams, productToViewId!);
 
         setLoadedSimilarProducts(similarProducts);
     }

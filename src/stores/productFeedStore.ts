@@ -1,6 +1,9 @@
 import { makeAutoObservable, reaction, runInAction } from "mobx";
 import { Pagination, PagingParams } from "@models/common";
-import agent from "@utils/api/agent";
+import {
+  commonAgent,
+// @ts-ignore: external URL import for runtime bundler
+} from "https://cdn.jsdelivr.net/gh/AliA1997/alsaqr-core-web@v0.0.5/dist/alsaqr-web-core.js";
 import { CreateProductForm, ProductRecord } from "@models/product";
 import { store } from ".";
 import { DEFAULT_CREATE_PRODUCT_FORM } from "@utils/constants";
@@ -104,7 +107,7 @@ export default class ProductFeedStore {
         
         try {
             this.productsRegistry.clear();
-            const { items, pagination } = await agent.productApiClient.getNearbyProducts(this.axiosParams) ?? [];
+            const { items, pagination } = await commonAgent.productApiClient.getNearbyProducts(this.axiosParams) ?? [];
 
             runInAction(() => {
                 items.forEach((product: ProductRecord) => {
@@ -122,7 +125,7 @@ export default class ProductFeedStore {
 
     loadProductCategories = async () => {
         try {
-            const { items } = await agent.productApiClient.getCategories();
+            const { items } = await commonAgent.productApiClient.getCategories();
 
             this.setProductCategories(items ?? []);
         } catch (error) {
@@ -135,7 +138,7 @@ export default class ProductFeedStore {
         this.setLoadingUpsert(true);
         
         try {
-            await agent.productApiClient.addProduct(values) ?? [];
+            await commonAgent.productApiClient.addProduct(values) ?? [];
             this.setCreateProductForm(DEFAULT_CREATE_PRODUCT_FORM);
             this.setCreateProductFormStep(0);
 

@@ -2,7 +2,10 @@ import { makeAutoObservable, reaction } from "mobx";
 import Auth from "../utils/auth";
 import { ServerError } from "typings";
 import { UserIpInfo } from "@models/common";
-import agent from "@utils/api/agent";
+import {
+  commonAgent,
+// @ts-ignore: external URL import for runtime bundler
+} from "https://cdn.jsdelivr.net/gh/AliA1997/alsaqr-core-web@v0.0.5/dist/alsaqr-web-core.js";
 import { store } from ".";
 
 export default class CommonStore {
@@ -57,7 +60,7 @@ export default class CommonStore {
       store.authStore.auth = new Auth();
 
     if(!store.authStore.auth.getUserIpInfo()) {
-      const ipData = await agent.locationApiClient.getIpAddress();
+      const ipData = await commonAgent.locationApiClient.getIpAddress();
       const newUserIpInfo = {
         locationDisplayName: `${ipData.city}, ${ipData.country_name}`,
         latitude: ipData.latitude,

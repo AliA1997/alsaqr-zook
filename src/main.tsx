@@ -9,7 +9,7 @@ import {
   configureAlSaqr,
   // PagingParams,
 // @ts-ignore: external URL import for runtime bundler
-} from "https://cdn.jsdelivr.net/gh/AliA1997/alsaqr-core-web/dist/alsaqr-web-core.js";
+} from "https://cdn.jsdelivr.net/gh/AliA1997/alsaqr-core-web@v0.0.5/dist/alsaqr-web-core.js";
 
 configureAlSaqr({
     supabaseUrl: import.meta.env.VITE_SUPABASE_URL,

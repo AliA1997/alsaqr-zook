@@ -1,12 +1,9 @@
 import axios, { AxiosResponse, AxiosError } from 'axios';
 import { PaginatedResult } from '../../models/common';
 import { listApiClient } from "./listsApiClient";
-import { notificationApiClient } from "./notificationApiClient";
 import { userApiClient } from "./userApiClient";
 import { messageApiClient } from "./messageApiClient";
 import { commentApiClient } from "./commentApiClient";
-import { productApiClient } from "./productApiClient";
-import { locationApiClient } from './locationApiClient';
 import { supabase } from '../infrastructure/supabase';
 
 export const extractQryParams = (request: any, paramsToExtract: string[]): (string | null)[] => {
@@ -124,10 +121,7 @@ axios.interceptors.response.use(
 const agent = {
   commentApiClient,
   listApiClient,
-  locationApiClient,
   messageApiClient,
-  notificationApiClient,
-  productApiClient,
   userApiClient
 };
 

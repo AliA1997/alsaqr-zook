@@ -1,6 +1,9 @@
 import { makeAutoObservable, reaction, runInAction } from "mobx";
 import { Pagination, PagingParams } from "@models/common";
-import agent from "@utils/api/agent";
+import {
+  commonAgent,
+// @ts-ignore: external URL import for runtime bundler
+} from "https://cdn.jsdelivr.net/gh/AliA1997/alsaqr-core-web@v0.0.5/dist/alsaqr-web-core.js";
 import { ProductRecord } from "@models/product";
 import { ProductCategories } from "@models/enums";
 import { store } from ".";
@@ -71,7 +74,7 @@ export default class RentalsFeedStore {
 
         this.setLoadingInitial(true);
         try {
-            const { items, pagination } = await agent.productApiClient.getNearbyProductsOnCategory(this.axiosParams, ProductCategories.Rentals) ?? [];
+            const { items, pagination } = await commonAgent.productApiClient.getNearbyProductsOnCategory(this.axiosParams, ProductCategories.Rentals) ?? [];
 
             runInAction(() => {
                 items.forEach((product: ProductRecord) => {
